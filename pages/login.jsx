@@ -42,7 +42,7 @@ const Login = () => {
 				{error && <p className={styles.error}>{error}</p>}
 				<Input
 					className={styles.input}
-					placeholder="Usuario"
+					placeholder="Email"
 					name="user"
 					value={form.user}
 					handleChange={handleChange}
