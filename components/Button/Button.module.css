@@ -4,7 +4,7 @@
 	border-radius: 5px;
 	margin: 0.3rem;
 	padding: 0.3rem 0.5rem;
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 1.2rem;
 }
 
@@ -28,14 +28,14 @@
 }
 
 .primary {
-	background-color: #AD73E5;
+	background-color: var(--main-color);
 	color: #fff;
 }
 
 .secondary {
 	background-color: #fff;
-	color: #AD73E5;
-	border: 3px solid #AD73E5;
+	color: var(--main-color);
+	border: 3px solid var(--main-color);
 	font-weight: 400;
 	font-size: 1rem;
 }

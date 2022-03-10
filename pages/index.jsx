@@ -1,5 +1,11 @@
+import Header from '../components/Header';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
-	return <div className={styles.container}>Hola</div>;
+	return (
+		<div className={styles.container}>
+			<Header />
+			Hola
+		</div>
+	);
 }

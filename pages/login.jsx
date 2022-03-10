@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
+import Header from '../components/Header';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import AuthServices, {useLoginContext} from '/services/AuthServices';
@@ -13,7 +14,7 @@ const Login = () => {
 	const router = useRouter();
 
 	useEffect(() => {
-		router.prefetch('/establishment');
+		router.prefetch('/home');
 	}, []);
 
 	const handleChange = (e) => {
@@ -28,20 +29,16 @@ const Login = () => {
 		else if (status === 'success') {
 			setError('');
 			dispatch({type: 'login', value: user});
-			router.replace('/establishment');
+			router.replace('/home');
 		}
 		setLoading(false);
 	};
 
 	return (
-		<main className={styles.main}>
-			<img
-				src="/assets/urbi-logotipo.svg"
-				className={styles.logo}
-				alt="Urbi Logo"
-			/>
-			<div className={styles.inputsContainer}>
-				<h2>Iniciar sesión</h2>
+		<>
+			<Header />
+			<main className={styles.main}>
+				<h2 className={styles.title}>Iniciar Sesión</h2>
 				{error && <p className={styles.error}>{error}</p>}
 				<Input
 					className={styles.input}
@@ -58,14 +55,14 @@ const Login = () => {
 					value={form.password}
 					handleChange={handleChange}
 				/>
-			</div>
-			<Button
-				disabled={loading}
-				label="Entrar"
-				handleClick={handleLogin}
-				size="large"
-			/>
-		</main>
+				<Button
+					disabled={loading}
+					label="Ingresar"
+					handleClick={handleLogin}
+					size="large"
+				/>
+			</main>
+		</>
 	);
 };
 
