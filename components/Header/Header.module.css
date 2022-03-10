@@ -1,0 +1,19 @@
+.container {
+	height: 3rem;
+	color: var(--font-light-color);
+	background-color: var(--main-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.img {
+	width: auto;
+	height: 2.7rem;
+	margin: 0 0.5rem;
+}
+
+.title {
+	font-size: 2rem;
+	font-weight: 400;
+}

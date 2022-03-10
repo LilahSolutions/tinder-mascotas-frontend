@@ -1,16 +1,28 @@
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	padding: 0;
+	margin: 0;
+	font-family: Roboto, Helvetica, Arial;
+	--main-color: #f44336;
+	--font-light-color: white;
+	--font-dark-color: black;
+}
+
+button {
+	cursor: pointer;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.box {
+	border-radius: 5px;
+	background-color: var(--main-color);
+	padding: 0.5rem;
 }

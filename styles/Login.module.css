@@ -1,0 +1,41 @@
+.main {
+	height: calc(100vh - 3rem);
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 3rem 2rem;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.main h2 {
+	text-align: center;
+	font-weight: 500;
+	font-size: 2rem;
+	margin-bottom: 1rem;
+}
+
+.input {
+	display: block;
+	width: 100%;
+	background-color: transparent;
+	border: 1px solid #cac8c8;
+	box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 4px;
+	margin: 0.7rem 0;
+	padding: 0.7rem 0.5rem;
+	font-size: 1.2rem;
+	font-weight: 400;
+}
+
+.error {
+	color: red;
+	margin: 0rem auto;
+	font-size: 1rem;
+	text-align: center;
+}
+
+.main button {
+	margin-top: 1.5rem;
+}
