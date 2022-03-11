@@ -66,30 +66,27 @@ const Register = () => {
 	};
 
 	return (
-		<>
-			<Header />
-			<main className={styles.main}>
-				<h2 className={styles.title}>Registrarse</h2>
-				{error && <p className={styles.error}>{error}</p>}
-				{fields.map(({id, label, type}) => (
-					<Input
-						key={id}
-						className={styles.input}
-						placeholder={label}
-						name={id}
-						value={form[id]}
-						type={type}
-						handleChange={handleChange}
-					/>
-				))}
-				<Button
-					disabled={loading}
-					label="Registrar"
-					handleClick={handleLogin}
-					size="large"
+		<main className={styles.main}>
+			<h2 className={styles.title}>Registrarse</h2>
+			{error && <p className={styles.error}>{error}</p>}
+			{fields.map(({id, label, type}) => (
+				<Input
+					key={id}
+					className={styles.input}
+					placeholder={label}
+					name={id}
+					value={form[id]}
+					type={type}
+					handleChange={handleChange}
 				/>
-			</main>
-		</>
+			))}
+			<Button
+				disabled={loading}
+				label="Registrar"
+				handleClick={handleLogin}
+				size="large"
+			/>
+		</main>
 	);
 };
 
