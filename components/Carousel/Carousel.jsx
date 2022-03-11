@@ -8,15 +8,21 @@ export const CarouselItem = ({width, transform, name, img, race, description}) =
 			<h2 className={styles.itemName}>{name}</h2>
 			<img className={styles.itemImg} src={img} alt={name}/>
 			<div className={styles.itemDescriptionCtn}>
-				{race && <span>{`Raza: ${race}`}</span>}
 				{
-				description && 
-				<div>
-					<span>
-						{`Dato curioso sobre ${name}: `}
-					</span>
-					<span>{description}</span>
-				</div>
+					race &&
+					<div>
+						<span className={styles.descriptionTitle}>Raza: </span>
+						<span>{race}</span>
+					</div>
+				}
+				{
+					description && 
+					<div className={styles.itemDescription}>
+						<span className={styles.descriptionTitle}>
+							{`Dato curioso sobre ${name}: `}
+						</span>
+						<span>{description}</span>
+					</div>
 				}
 			</div>
 		</div>
@@ -38,7 +44,7 @@ const Carousel = ({children}) => {
 
 	const swipeHandlers = useSwipeable({
 		onSwipedLeft: () => updateIndex(activeIndex + 1),
-		onSwipedRight: () => updateIndex(activeIndex - 1)
+		onSwipedRight: () => updateIndex(activeIndex - 1),
 	})
 
 	return (
