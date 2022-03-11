@@ -11,7 +11,7 @@ export const CarouselItem = ({width, transform, name, img, race, description}) =
 				{race && <span>{`Raza: ${race}`}</span>}
 				{
 				description && 
-				<div>
+				<div className={styles.itemDescription}>
 					<span>
 						{`Dato curioso sobre ${name}: `}
 					</span>
