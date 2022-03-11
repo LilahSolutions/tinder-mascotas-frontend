@@ -1,0 +1,42 @@
+.carousel{
+	overflow: hidden;
+}
+
+.carouselInner{
+	white-space: nowrap; /* keeps items in one line */
+	transition: transform 0.3s;
+}
+
+.carouselItem{
+	display: inline-flex; /* also keeps items in one line */
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: space-evenly;
+	margin: 0 10% 0 0%;
+	height: 20rem;
+	background-color: var(--main-color);
+	color: #fff;
+	border-radius: 10px;
+}
+
+.carouselItem:first-child{
+	margin: 0 10% 0 20%;
+}
+
+/* .itemName{
+	justify-self: flex-start;
+} */
+
+.itemImg{
+	width: 50%
+}
+
+.itemDescriptionCtn{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-around;
+	width: 80%;
+	height: 35%;
+	white-space: normal;
+	font-size: .9rem;
+}
