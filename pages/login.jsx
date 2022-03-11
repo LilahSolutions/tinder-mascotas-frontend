@@ -35,34 +35,31 @@ const Login = () => {
 	};
 
 	return (
-		<>
-			<Header />
-			<main className={styles.main}>
-				<h2 className={styles.title}>Iniciar Sesión</h2>
-				{error && <p className={styles.error}>{error}</p>}
-				<Input
-					className={styles.input}
-					placeholder="Email"
-					name="user"
-					value={form.user}
-					handleChange={handleChange}
-				/>
-				<Input
-					className={styles.input}
-					placeholder="Contraseña"
-					name="password"
-					type="password"
-					value={form.password}
-					handleChange={handleChange}
-				/>
-				<Button
-					disabled={loading}
-					label="Ingresar"
-					handleClick={handleLogin}
-					size="large"
-				/>
-			</main>
-		</>
+		<main className={styles.main}>
+			<h2 className={styles.title}>Iniciar Sesión</h2>
+			{error && <p className={styles.error}>{error}</p>}
+			<Input
+				className={styles.input}
+				placeholder="Email"
+				name="user"
+				value={form.user}
+				handleChange={handleChange}
+			/>
+			<Input
+				className={styles.input}
+				placeholder="Contraseña"
+				name="password"
+				type="password"
+				value={form.password}
+				handleChange={handleChange}
+			/>
+			<Button
+				disabled={loading}
+				label="Ingresar"
+				handleClick={handleLogin}
+				size="large"
+			/>
+		</main>
 	);
 };
 

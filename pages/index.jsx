@@ -1,4 +1,3 @@
-import Header from '../components/Header';
 import Carousel, { CarouselItem } from '../components/Carousel/Carousel';
 import styles from '../styles/Home.module.css';
 
