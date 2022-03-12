@@ -8,6 +8,11 @@ body {
 	--font-dark-color: black;
 }
 
+#__next {
+	height: 100vh;
+	overflow: hidden auto;
+}
+
 button {
 	cursor: pointer;
 }
@@ -19,6 +24,15 @@ a {
 
 * {
 	box-sizing: border-box;
+}
+
+main {
+	height: calc(100vh - 3rem);
+}
+
+main:not(:last-child) {
+	/* When we have a tab navigator */
+	height: calc(100vh - 7rem);
 }
 
 .box {

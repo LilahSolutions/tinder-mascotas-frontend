@@ -1,5 +1,10 @@
+import {MatchTabNavigator} from '../components/TabNavigator';
 import styles from '../styles/Home.module.css';
 
-export default function Home() {
-	return <div className={styles.container}>Hola</div>;
+function Home() {
+	return <main className={styles.container}>Hola</main>;
 }
+
+Home.TabNavigator = MatchTabNavigator;
+
+export default Home;

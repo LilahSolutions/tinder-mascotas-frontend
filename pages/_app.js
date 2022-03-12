@@ -3,6 +3,8 @@ import Header from '../components/Header';
 import '../styles/globals.css';
 
 function MyApp({Component, pageProps}) {
+	const TabNavigator = Component.TabNavigator;
+
 	return (
 		<>
 			<Head>
@@ -15,6 +17,7 @@ function MyApp({Component, pageProps}) {
 			</Head>
 			<Header />
 			<Component {...pageProps} />
+			{TabNavigator && <TabNavigator />}
 		</>
 	);
 }
