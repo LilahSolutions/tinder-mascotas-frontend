@@ -1,10 +1,11 @@
 import Carousel, { CarouselItem } from '../components/Carousel/Carousel';
+import {MatchTabNavigator} from '../components/TabNavigator';
 import styles from '../styles/Home.module.css';
 import { mockedPets } from '../services/constants';
 
-export default function Home() {
+function Home() {
 	return (
-		<div className={styles.container}>
+		<main className={styles.container}>
 			<Carousel>
 				{mockedPets.map(
 					(pet, index) => 
@@ -14,6 +15,10 @@ export default function Home() {
 					/>)
 				}
 			</Carousel>
-		</div>
+		</main>
 	);
 }
+
+Home.TabNavigator = MatchTabNavigator;
+
+export default Home;
