@@ -10,27 +10,23 @@ function Home() {
 	const [activePet, setActivePet] = useState(0);
 
 	return (
-		<body>
-			<main className={styles.container}>
-				<WelcomeBar username='Eren' />
-				<Carousel>
-					{mockedPets.map(
-						(pet, index) => 
-						<CarouselItem 
-							key={index}
-							{...pet}
-						/>)
-					}
-				</Carousel>
-			</main>
-			<footer>
-				<PetSelector 
-					myMockedPets={myMockedPets} 
-					activePet={activePet} 
-					setActivePet={setActivePet} 
-				/>
-			</footer>
-		</body>
+		<main className={styles.container}>
+			<WelcomeBar username='Eren' />
+			<Carousel>
+				{mockedPets.map(
+					(pet, index) => 
+					<CarouselItem 
+						key={index}
+						{...pet}
+					/>)
+				}
+			</Carousel>
+			<PetSelector 
+				myMockedPets={myMockedPets} 
+				activePet={activePet} 
+				setActivePet={setActivePet} 
+			/>
+		</main>
 	);
 }
 

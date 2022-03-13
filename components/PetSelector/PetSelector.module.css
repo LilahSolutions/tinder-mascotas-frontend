@@ -1,9 +1,11 @@
 .petSelectorContainer{
-	height: 15%;
+	height: max-content;
 	width: 100%;
 	overflow: scroll;
 	display: flex;
-	padding: 1rem 0 1rem 1rem;
+	padding: 1rem 0 0rem 1rem;
+	position: absolute;
+	bottom: 0;
 }
 
 .petSelectorContainer::-webkit-scrollbar{
