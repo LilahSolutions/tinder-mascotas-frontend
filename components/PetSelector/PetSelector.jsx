@@ -9,11 +9,11 @@ export const PetBubble = ({img, name, isActive, setActivePet, index}) => {
 	)
 }
 
-const PetSelector = ({myMockedPets, activePet, setActivePet}) => {
+const PetSelector = ({pets, activePet, setActivePet}) => {
 	return(
 		<div className={styles.petSelectorContainer}>
 			{
-				myMockedPets.map((pet, index) => 
+				pets.map((pet, index) => 
 					<PetBubble 
 						key={index} 
 						{...pet} 
