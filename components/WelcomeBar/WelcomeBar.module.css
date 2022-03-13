@@ -1,0 +1,15 @@
+.welcomeBar{
+	width: 80%;
+	height: 3rem;
+	background-color: var(--main-color);
+	border-radius:10px;
+	margin: 1rem auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.welcomeMsg{
+	color: white;
+	font-size: 1.3rem;
+}

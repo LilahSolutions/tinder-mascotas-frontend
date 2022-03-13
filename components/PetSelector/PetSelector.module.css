@@ -1,0 +1,40 @@
+.petSelectorContainer{
+	height: max-content;
+	width: 100%;
+	overflow: scroll;
+	display: flex;
+	padding: 1rem 0 0rem 1rem;
+	position: absolute;
+	bottom: 0;
+}
+
+.petSelectorContainer::-webkit-scrollbar{
+	display: none;
+}
+
+.petBubble{
+	width: 4rem;
+	margin-right: 1.5rem;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+}
+
+.petImg{
+	width: 4rem;
+	height: 4rem;
+	object-fit: cover;
+	border-radius: 50%;
+	border: 2px gainsboro solid;
+	padding: .2rem
+}
+
+.petName{
+	font-size: .9rem;
+}
+
+.active{
+	border: 2px var(--main-color) solid;
+	padding: .3rem;
+	background-color: gainsboro;
+}
