@@ -12,7 +12,7 @@ function Home() {
 	return (
 		<body>
 			<main className={styles.container}>
-				<WelcomeBar />
+				<WelcomeBar username='Eren' />
 				<Carousel>
 					{mockedPets.map(
 						(pet, index) => 
@@ -22,12 +22,14 @@ function Home() {
 						/>)
 					}
 				</Carousel>
+			</main>
+			<footer>
 				<PetSelector 
 					myMockedPets={myMockedPets} 
 					activePet={activePet} 
 					setActivePet={setActivePet} 
 				/>
-			</main>
+			</footer>
 		</body>
 	);
 }
