@@ -28,16 +28,22 @@ a {
 
 main {
 	height: calc(100vh - 3rem);
+	max-height: calc(100vh - 3rem);
+	overflow: hidden auto;
+  position: relative;
 }
 
 main:not(:last-child) {
 	/* When we have a tab navigator */
 	height: calc(100vh - 7rem);
-	position: relative;
+	max-height: calc(100vh - 7rem);
 }
 
 .box {
 	border-radius: 5px;
 	background-color: var(--main-color);
-	padding: 0.5rem;
+	color: var(--font-light-color);
+	padding: 0.7rem;
+	font-weight: 500;
+	text-align: center;
 }

@@ -1,0 +1,22 @@
+.buttonContainer{
+	display: flex;
+	width: max-content;
+	margin: 3rem auto 0 auto;
+	flex-flow: column nowrap;
+	align-items: center;
+}
+
+.buttonImage{
+	filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, .7));
+}
+
+.buttonContainer:active .buttonImage{
+	transform: scale(.9);
+	filter: drop-shadow( 1px 1px 1px rgba(0, 0, 0, .7));
+}
+
+.buttonText{
+	margin-top: .7rem;
+	font-weight: bold;
+	color: #303030;
+}
