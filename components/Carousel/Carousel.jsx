@@ -29,8 +29,7 @@ export const CarouselItem = ({width, transform, name, img, race, description}) =
 	)
 }
 
-const Carousel = ({children}) => {
-	const [activeIndex, setActiveIndex] = useState(0);
+const Carousel = ({children, activeIndex, setActiveIndex}) => {
 
 	const updateIndex = (newIndex) => {
 		if(newIndex < 0){
