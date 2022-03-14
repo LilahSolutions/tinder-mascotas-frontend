@@ -1,0 +1,19 @@
+.petActionContainer{
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: center;
+}
+
+.addImg{
+	border: 1px var(--main-color) solid;
+	border-radius: 50%;
+	height: 10rem;
+	width: 10rem;
+	text-align: center;
+	object-fit: cover;
+}
+
+.plusIcon{
+	padding: 1.5rem;
+}
