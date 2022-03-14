@@ -30,6 +30,7 @@ main {
 	height: calc(100vh - 3rem);
 	max-height: calc(100vh - 3rem);
 	overflow: hidden auto;
+  position: relative;
 }
 
 main:not(:last-child) {
