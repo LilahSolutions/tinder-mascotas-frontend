@@ -1,3 +1,4 @@
+import {useState, useEffect} from 'react';
 import Head from 'next/head';
 import Header from '../components/Header';
 import {LoginProvider} from '../utils/auth';
@@ -5,13 +6,15 @@ import '../styles/globals.css';
 
 function MyApp({Component, pageProps}) {
 	const TabNavigator = Component.TabNavigator;
-	const isDesktop = globalThis.innerWidth > 720;
+	const [isDesktop, setIsDesktop] = useState(globalThis.innerWidth > 720);
 
-	// useEffect(() => {
-	// globalThis.document.documentElement.addEventListener('resize', (e) => {
-	// 	console.log(e.target.clientWidth);
-	// })
-	// })
+	useEffect(() => {
+		const updateNavBar = () => setIsDesktop(!!(window.innerWidth > 720));
+		if (window) {
+			window.addEventListener('resize', updateNavBar);
+			return () => window.removeEventListener('resize', updateNavBar);
+		}
+	}, []);
 
 	return (
 		<>
