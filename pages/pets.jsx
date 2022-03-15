@@ -1,34 +1,11 @@
 import Link from 'next/link';
-// import {withAuth, usePets} from '../utils/auth';
+import {withAuth, usePets} from '../utils/auth';
 import Button from '../components/Button';
 import {PetsTabNavigator} from '../components/TabNavigator';
 import styles from '../styles/Pets.module.css';
 
 const Pets = () => {
-	// const pets = usePets();
-	const pets = [
-		{
-			id: 1,
-			name: 'Jaskier',
-			gender: 'male',
-			type: 'cat',
-			photo: '/assets/cat-pic.jpg',
-		},
-		{
-			id: 2,
-			name: 'Jaskier',
-			gender: 'male',
-			type: 'cat',
-			photo: '/assets/cat-pic.jpg',
-		},
-		{
-			id: 3,
-			name: 'Jaskier',
-			gender: 'male',
-			type: 'cat',
-			photo: '/assets/cat-pic.jpg',
-		},
-	];
+	const pets = usePets();
 
 	const deletePet = (id) => {
 		console.log('Goodbye, ', id);
@@ -83,7 +60,7 @@ const Pets = () => {
 	);
 };
 
-Pets.TabNavigator = PetsTabNavigator;
+const Component = withAuth(Pets);
+Component.TabNavigator = PetsTabNavigator;
 
-export default Pets;
-// export default withAuth(Pets);
+export default Component;

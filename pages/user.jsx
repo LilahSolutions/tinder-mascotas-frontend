@@ -1,15 +1,9 @@
-// import {withAuth, useUser} from '../utils/auth';
+import {withAuth, useUser} from '../utils/auth';
 import {ProfileTabNavigator} from '../components/TabNavigator';
 import styles from '../styles/User.module.css';
 
 function Profile() {
-	// const user = useUser();
-	const user = {
-		name: 'Ro',
-		lastname: 'Mena',
-		email: 'r@lila.com',
-		photo: '/assets/cat-pic.jpg',
-	};
+	const user = useUser();
 
 	return (
 		<main className={styles.container}>
@@ -30,7 +24,7 @@ function Profile() {
 	);
 }
 
-Profile.TabNavigator = ProfileTabNavigator;
+const Component = withAuth(Profile);
+Component.TabNavigator = ProfileTabNavigator;
 
-export default Profile;
-// export default withAuth(Profile);
+export default Component;
