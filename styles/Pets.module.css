@@ -1,0 +1,36 @@
+.container {
+	padding: 0 1rem;
+}
+
+.container > h2:first-child,
+.petsList {
+	margin: 1rem auto;
+	max-width: 900px;
+}
+
+.addButton {
+	float: right;
+}
+
+.petsList {
+	margin-top: 5rem;
+	padding: 0;
+	list-style: none;
+}
+
+.photo {
+	display: block;
+	width: 5rem;
+	height: 5rem;
+	border: 2px solid var(--main-color);
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.petsList h4 {
+	font-size: 1.1rem;
+}
+
+.petsList h4 span {
+	font-weight: 400;
+}
