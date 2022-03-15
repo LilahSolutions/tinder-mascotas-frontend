@@ -1,7 +1,9 @@
+// import {withAuth, useUser} from '../utils/auth';
 import {ProfileTabNavigator} from '../components/TabNavigator';
 import styles from '../styles/User.module.css';
 
 function Profile() {
+	// const user = useUser();
 	const user = {
 		name: 'Ro',
 		lastname: 'Mena',
@@ -31,3 +33,4 @@ function Profile() {
 Profile.TabNavigator = ProfileTabNavigator;
 
 export default Profile;
+// export default withAuth(Profile);
