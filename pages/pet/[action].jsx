@@ -93,7 +93,7 @@ const MyPetAction = () => {
 				hidden 
 			/>
 			<input type='text' value={pet.name} onChange={e => nameHandler(e)}/>
-			<Button label={`¡${buttonLabels[action]} mascota!`} onClick={savePet}/>
+			<Button label={`¡${buttonLabels[action]} mascota!`} onClick={savePet} size='small'/>
 		</div>
 	)
 }
