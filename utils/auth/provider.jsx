@@ -1,7 +1,38 @@
 import {useReducer} from 'react';
 import {LoginContext} from './context';
 
-const initialState = {isLoggedIn: false, user: null};
+const mockUser = {
+	name: 'Ro',
+	lastname: 'Mena',
+	email: 'r@lila.com',
+	photo: '/assets/cat-pic.jpg',
+	pets: [
+		{
+			id: 1,
+			name: 'Jaskier',
+			gender: 'male',
+			type: 'cat',
+			photo: '/assets/cat-pic.jpg',
+		},
+		{
+			id: 2,
+			name: 'Jaskier',
+			gender: 'male',
+			type: 'cat',
+			photo: '/assets/cat-pic.jpg',
+		},
+		{
+			id: 3,
+			name: 'Jaskier',
+			gender: 'male',
+			type: 'cat',
+			photo: '/assets/cat-pic.jpg',
+		},
+	],
+};
+
+const initialState = {isLoggedIn: true, user: mockUser}; ///
+// const initialState = {isLoggedIn: false, user: null };
 
 const reducer = (state, action) => {
 	switch (action.type) {
