@@ -6,6 +6,7 @@ import '../styles/globals.css';
 
 function MyApp({Component, pageProps}) {
 	const TabNavigator = Component.TabNavigator;
+	const goBackRoute = Component.goBack;
 	const [isDesktop, setIsDesktop] = useState(globalThis.innerWidth > 720);
 
 	useEffect(() => {
@@ -26,7 +27,7 @@ function MyApp({Component, pageProps}) {
 				/>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<Header showNav={isDesktop && TabNavigator} />
+			<Header showNav={isDesktop && TabNavigator} goBack={goBackRoute} />
 			<LoginProvider>
 				<Component {...pageProps} />
 			</LoginProvider>
