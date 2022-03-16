@@ -2,13 +2,16 @@ import { useRouter } from "next/router"
 import { useEffect, useState, useRef } from "react";
 import MessageBar from "../../components/MessageBar/MessageBar";
 import Button from "../../components/Button"
+import Input from '../../components/Input'
+import { TYPE_OPTIONS, SEX_OPTIONS } from "./config";
 import styles from './[action].module.css'
+import Dropdown from "../../components/Dropdown";
 
 const MyPetAction = () => {
 	const [action, setAction] = useState('')
 	const [pet, setPet] = useState({
 		name: '', 
-		img: 'https://www.collinsdictionary.com/images/full/dog_230497594.jpg',
+		img: '',
 		type: '', 
 		sex: ''
 	})
@@ -31,9 +34,17 @@ const MyPetAction = () => {
 	useEffect(() => {
 		if(action === 'edit'){
 			//Backend stuff
-			// setPet()
+			const mockedPet = {
+				name: 'Pancho',
+				type: 'Tortuga',
+				img: 'https://www.collinsdictionary.com/images/full/dog_230497594.jpg',
+				sex: 'Hembra'
+			};
+
+			setPet(mockedPet);
+			setCurrentImage(mockedPet.img);
 		}
-	}, [])
+	}, [action])
 
 	useEffect(() => {
 		if(router.isReady && !router.asPath.endsWith('add') && !router.asPath.endsWith('edit')) router.push('/')
@@ -64,14 +75,35 @@ const MyPetAction = () => {
 		}
 	};
 
-	const nameHandler = ({target: { value }}) => setPet({...pet, name: value});
+	const nameHandler = ({target: { value }}) => {
+		// if(value === '') {
+		// 	errors.push('nameField')
+		// 	setErrors(errors)
+		// }else{
+		const errorIndex = errors.findIndex(e => e !== 'nameField')
+		errors.splice(errorIndex, 1)
+		setErrors(errors)
+		// }
+		setPet({...pet, name: value})
+	};
+	
+	const dropdownHandler = ({ target: { value, name }}) => setPet({...pet, [name]: value})
+
+	const hasErrors = field => errors.includes(field)
 
 	const savePet = () => {
+		if(pet.name === '' && !errors.includes('nameField')) {
+			console.log('error pibe')
+			errors.push('nameField')
+			setErrors(errors)
+		}
+
 		if(errors.length === 0){
+			console.log('Sin Errores')
 			//Backend stuff
 		}
 	}
-
+	
 	return(
 		<div className={styles.petActionContainer}>
 			<MessageBar message={`${actions[action]} mascota`} />
@@ -82,7 +114,8 @@ const MyPetAction = () => {
 				src={
 					action === 'add' 
 					? '/assets/plus.svg' 
-					: currentImage} 
+					: currentImage
+				} 
 				alt='Imagen de mascota' 
 			/>
 			<input 
@@ -92,8 +125,36 @@ const MyPetAction = () => {
 				accept="image/*" 
 				hidden 
 			/>
-			<input type='text' value={pet.name} onChange={e => nameHandler(e)}/>
-			<Button label={`¡${buttonLabels[action]} mascota!`} onClick={savePet} size='small'/>
+			<Input 
+				type='text'
+				value={pet.name} 
+				handleChange={e => nameHandler(e)}
+				size='medium'
+			/>
+			{
+				hasErrors('nameField') 
+				&& <span className={styles.error}>Debe ingresar un nombre</span>
+			}
+			<Dropdown
+				name='type'
+				defaultValue={pet.type}
+				options={TYPE_OPTIONS}
+				handleChange={e => dropdownHandler(e)}
+				size='medium'
+			/>
+			<Dropdown
+				name='sex'
+				defaultValue={pet.sex}
+				options={SEX_OPTIONS}
+				handleChange={e => dropdownHandler(e)}
+				size='medium'
+			/>
+			<Button 
+				label={`¡${buttonLabels[action]} mascota!`} 
+				handleClick={savePet} 
+				size='medium' 
+				className={styles.buttonAnimation} 
+			/>
 		</div>
 	)
 }

@@ -2,11 +2,12 @@
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-around;
+	height: 60%;
 }
 
 .addImg{
-	border: 1px var(--main-color) solid;
+	border: 3px var(--main-color) solid;
 	border-radius: 50%;
 	height: 10rem;
 	width: 10rem;
@@ -15,5 +16,10 @@
 }
 
 .plusIcon{
-	padding: 1.5rem;
+	padding: 2rem;
+}
+
+.error{
+	color: red;
+	font-size: .9rem;
 }

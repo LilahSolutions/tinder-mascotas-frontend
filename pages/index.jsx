@@ -25,10 +25,11 @@ function Home() {
 			>
 				{mockedPets.map(
 					(pet, index) => 
-					<CarouselItem 
-						key={index}
-						{...pet}
-					/>)
+						<CarouselItem 
+							key={index}
+							{...pet}
+						/>
+					)
 				}
 			</Carousel>
 			<MatchButton handler={likeHandler} />
