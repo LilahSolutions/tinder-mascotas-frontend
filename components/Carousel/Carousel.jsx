@@ -7,7 +7,7 @@ import { MESSAGE_IDS } from '../../services/config'
 
 export const CarouselItem = ({width, transform, name, img, race, description}) => {
 	return (
-		<div className={styles.carouselItem} style={{width, transform, transition: 'transform .3s'}}>
+		<div className={classNames(styles.carouselItem, styles.card)} style={{width, transform, transition: 'transform .3s'}}>
 			<h2 className={styles.itemName}>{name}</h2>
 			<img className={styles.itemImg} src={img} alt={name}/>
 			<div className={styles.itemDescriptionCtn}>
@@ -34,7 +34,7 @@ export const CarouselItem = ({width, transform, name, img, race, description}) =
 
 export const NoCarousel = ({ messageId }) => {
 	return(
-		<div className={classNames(styles.carouselItem, styles.noCarousel)} style={{width: '70%'}}>
+		<div className={classNames(styles.noCarousel, styles.card)}>
 			<h2 className={styles.itemName}>
 				{MESSAGE_IDS[messageId]}
 			</h2>
