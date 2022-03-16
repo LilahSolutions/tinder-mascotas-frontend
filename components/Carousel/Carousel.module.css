@@ -15,13 +15,32 @@
 	justify-content: space-evenly;
 	margin: 0 10% 0 0%;
 	height: 20rem;
+}
+
+.card{
 	background-color: var(--main-color);
 	color: #fff;
 	border-radius: 10px;
 }
 
+.noCarousel{
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: space-evenly;
+	margin: auto;
+	height: max-content;
+	padding-bottom: 1rem;
+	width: 70%;
+}
+
+
 .carouselItem:first-child{
 	margin: 0 10% 0 20%;
+}
+
+.itemName{
+	text-align: center;
 }
 
 .itemImg{
@@ -41,6 +60,11 @@
 
 .descriptionTitle{
 	font-weight: bolder;
+}
+
+.link{
+	text-decoration: underline;
+	margin-top: 1.5rem;
 }
 
 .itemDescription{

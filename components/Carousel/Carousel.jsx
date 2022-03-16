@@ -1,10 +1,13 @@
 import styles from './Carousel.module.css'
-import React, {useState} from 'react'
+import React from 'react'
+import Link from 'next/link';
 import { useSwipeable } from 'react-swipeable'
+import classNames from '../../utils/classNames'
+import { MESSAGE_IDS } from '../../services/config'
 
 export const CarouselItem = ({width, transform, name, img, race, description}) => {
 	return (
-		<div className={styles.carouselItem} style={{width, transform, transition: 'transform .3s'}}>
+		<div className={classNames(styles.carouselItem, styles.card)} style={{width, transform, transition: 'transform .3s'}}>
 			<h2 className={styles.itemName}>{name}</h2>
 			<img className={styles.itemImg} src={img} alt={name}/>
 			<div className={styles.itemDescriptionCtn}>
@@ -25,6 +28,23 @@ export const CarouselItem = ({width, transform, name, img, race, description}) =
 					</div>
 				}
 			</div>
+		</div>
+	)
+}
+
+export const NoCarousel = ({ messageId }) => {
+	return(
+		<div className={classNames(styles.noCarousel, styles.card)}>
+			<h2 className={styles.itemName}>
+				{MESSAGE_IDS[messageId]}
+			</h2>
+			<img src='/assets/sad-dog.png' alt='sad pet' />
+			{
+				messageId === 'no_pets' &&
+				<Link href='/pet/add' passHref>
+					<span className={classNames(styles.descriptionTitle, styles.link)}>Agregar mascotas</span>
+				</Link>
+			}
 		</div>
 	)
 }

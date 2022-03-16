@@ -1,10 +1,10 @@
 import {useState} from 'react';
 import {withAuth} from '../utils/auth';
-import Carousel, {CarouselItem} from '../components/Carousel/Carousel';
+import Carousel, {CarouselItem, NoCarousel} from '../components/Carousel/Carousel';
 import MessageBar from '../components/MessageBar/MessageBar';
 import {MatchTabNavigator} from '../components/TabNavigator';
 import styles from '../styles/Home.module.css';
-import {mockedPets, myMockedPets} from '../services/constants';
+import {mockedPets as matchedPets, myMockedPets as myPets} from '../services/constants';
 import PetSelector from '../components/PetSelector/PetSelector';
 import MatchButton from '../components/MatchButton';
 
@@ -13,21 +13,32 @@ function Home() {
 	const [activeIndex, setActiveIndex] = useState(0);
 
 	const likeHandler = () => {
-		console.log('Le diste like a', mockedPets[activeIndex].name);
+		console.log('Le diste like a', matchedPets[activeIndex].name);
 	};
 
 	const username = 'Eren';
 	return (
 		<main className={styles.container}>
 			<MessageBar message={`¡Bienvenido, ${username}!`} />
-			<Carousel activeIndex={activeIndex} setActiveIndex={setActiveIndex}>
-				{mockedPets.map((pet, index) => (
-					<CarouselItem key={index} {...pet} />
-				))}
-			</Carousel>
-			<MatchButton handler={likeHandler} />
+			{
+				!!matchedPets.length && 
+				<Carousel activeIndex={activeIndex} setActiveIndex={setActiveIndex}>
+					{matchedPets.map((pet, index) => (
+						<CarouselItem key={index} {...pet} />
+					))}
+				</Carousel>
+			}
+			{!!matchedPets.length && <MatchButton handler={likeHandler} />}
+			{
+				!matchedPets.length && !!myPets.length &&
+				<NoCarousel messageId='no_matches'/>
+			}
+			{
+				!myPets.length &&
+				<NoCarousel messageId='no_pets' />
+			}
 			<PetSelector
-				pets={myMockedPets}
+				pets={myPets}
 				activePet={activePet}
 				setActivePet={setActivePet}
 			/>
