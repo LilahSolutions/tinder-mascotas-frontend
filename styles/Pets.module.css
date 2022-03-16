@@ -1,0 +1,75 @@
+.container {
+	padding: 0 1rem;
+}
+
+.container > h2:first-child,
+.petsList {
+	margin: 1rem auto;
+	max-width: 900px;
+}
+
+.addButton {
+	align-self: flex-end;
+}
+
+.petsList {
+	padding: 0;
+	list-style: none;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.petsList li:not(:first-child) {
+	width: 100%;
+	padding: 0.5rem 0;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid gainsboro;
+}
+
+.photo {
+	display: block;
+	width: 5rem;
+	height: 5rem;
+	border: 2px solid var(--main-color);
+	border-radius: 50%;
+	object-fit: cover;
+	float: left;
+}
+
+.dataContainer {
+	min-width: 30%;
+	margin: 0 auto 0 1rem;
+}
+
+.dataContainer h4 {
+	font-size: 1rem;
+	margin: 0;
+}
+
+.dataContainer h4:first-of-type {
+	width: 100%;
+}
+
+.dataContainer h4 span {
+	font-weight: 400;
+}
+
+.buttonsContainer {
+	height: 3rem;
+	width: 100%;
+	max-width: 450px;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	margin: 0 auto;
+}
+
+.buttonsContainer button {
+	min-width: 28%;
+	font-size: 1rem;
+}
