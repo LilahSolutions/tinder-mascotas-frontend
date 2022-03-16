@@ -3,8 +3,8 @@ import { useEffect, useState, useRef } from "react";
 import MessageBar from "../../components/MessageBar/MessageBar";
 import Button from "../../components/Button"
 import Input from '../../components/Input'
-import { TYPE_OPTIONS, SEX_OPTIONS } from "./config";
-import styles from './[action].module.css'
+import { TYPE_OPTIONS, SEX_OPTIONS } from "../../services/config";
+import styles from '../../styles/pet-actions.module.css'
 import Dropdown from "../../components/Dropdown";
 
 const MyPetAction = () => {
@@ -76,32 +76,39 @@ const MyPetAction = () => {
 	};
 
 	const nameHandler = ({target: { value }}) => {
-		// if(value === '') {
-		// 	errors.push('nameField')
-		// 	setErrors(errors)
-		// }else{
 		const errorIndex = errors.findIndex(e => e !== 'nameField')
 		errors.splice(errorIndex, 1)
 		setErrors(errors)
-		// }
+		
 		setPet({...pet, name: value})
 	};
 	
 	const dropdownHandler = ({ target: { value, name }}) => setPet({...pet, [name]: value})
 
-	const hasErrors = field => errors.includes(field)
+	const hasErrors = field => {
+		console.log(errors.includes(field));
+		return errors.includes(field)
+	}
+
+	const validateErrors = () => {
+		const auxErrors = [];
+
+		if(pet.name === '' && !errors.includes('nameField')) {
+			auxErrors = [...errors, 'nameField']
+		}
+
+		return auxErrors;
+	};
 
 	const savePet = () => {
-		if(pet.name === '' && !errors.includes('nameField')) {
-			console.log('error pibe')
-			errors.push('nameField')
-			setErrors(errors)
+		const currentErrors = validateErrors();
+
+		if(currentErrors.length === 0){
+			//Backend stuff
+		}else{
+			setErrors(currentErrors);
 		}
 
-		if(errors.length === 0){
-			console.log('Sin Errores')
-			//Backend stuff
-		}
 	}
 	
 	return(
