@@ -1,0 +1,21 @@
+.dropdown {
+	background: #fffdfd;
+	border: 0.2px solid #cac8c8;
+	box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 3px;
+	margin: 0.3rem;
+	padding: 0.3rem 0.5rem;
+	width: 70%;
+}
+
+.small {
+	width: 40%;
+}
+
+.medium {
+	width: 70%;
+}
+
+.large {
+	width: 100%;
+}
