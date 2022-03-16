@@ -14,14 +14,12 @@ const Pets = () => {
 	return (
 		<main className={styles.container}>
 			<h2 className="box">Mis mascotas</h2>
-			<Link href="/pet/add" passHref>
-				<Button
-					label="Agregar mascota"
-					size="small"
-					className={styles.addButton}
-				/>
-			</Link>
 			<ul className={styles.petsList}>
+				<li className={styles.addButton}>
+					<Link href="/pet/add" passHref>
+						<Button label="Agregar mascota" size="small" />
+					</Link>
+				</li>
 				{pets.map((pet) => (
 					<li key={pet.id} className={styles.petItem}>
 						<img
@@ -29,7 +27,7 @@ const Pets = () => {
 							src={pet.photo}
 							alt="Foto de mascota"
 						/>
-						<div>
+						<div className={styles.dataContainer}>
 							<h4>
 								Nombre: <span>{pet.name}</span>
 							</h4>
@@ -40,7 +38,7 @@ const Pets = () => {
 								Especie: <span>{pet.type}</span>
 							</h4>
 						</div>
-						<div>
+						<div className={styles.buttonsContainer}>
 							<Link href={`/pets/${pet.id}`} passHref>
 								<Button label="Ver" size="small" />
 							</Link>
