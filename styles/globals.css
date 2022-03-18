@@ -30,7 +30,7 @@ main {
 	height: calc(100vh - 3rem);
 	max-height: calc(100vh - 3rem);
 	overflow: hidden auto;
-  position: relative;
+	position: relative;
 }
 
 main:not(:last-child) {
@@ -40,7 +40,7 @@ main:not(:last-child) {
 }
 
 .box {
-	border-radius: 5px;
+	border-radius: 10px;
 	background-color: var(--main-color);
 	color: var(--font-light-color);
 	padding: 0.7rem;

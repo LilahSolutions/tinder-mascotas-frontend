@@ -1,6 +1,5 @@
 import {withAuth, usePets, useUser} from '../../utils/auth';
-import {PetsTabNavigator} from '../../components/TabNavigator';
-import styles from '../../styles/Pets.module.css';
+import styles from '../../styles/Pet.module.css';
 
 const Pets = () => {
 	const user = useUser();
@@ -16,12 +15,14 @@ const Pets = () => {
 		<main className={styles.container}>
 			<img className={styles.mainPhoto} src={pet.photo} alt="Foto de mascota" />
 			<h2 className={styles.name}>{pet.name}</h2>
-			<p>
-				Sexo: <span>{pet.gender}</span>
-			</p>
-			<p>
-				Tipo: <span>{pet.type}</span>
-			</p>
+			<div className={styles.petData}>
+				<h4>
+					Sexo: <span>{pet.gender}</span>
+				</h4>
+				<h4>
+					Tipo: <span>{pet.type}</span>
+				</h4>
+			</div>
 			<h2 className="box">Mascotas a las que les gusta {pet.name}</h2>
 			<p className="box">¡Contacta a sus dueños por mail!</p>
 			<ul className={styles.petsList}>
@@ -54,6 +55,6 @@ const Pets = () => {
 };
 
 const Component = withAuth(Pets);
-Component.TabNavigator = PetsTabNavigator;
+Component.goBack = '/pets';
 
 export default Component;
