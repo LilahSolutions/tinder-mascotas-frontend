@@ -2,8 +2,17 @@ import Link from 'next/link';
 import {TABS} from '../../services/constants';
 import styles from './Header.module.css';
 
-const Header = ({showNav}) => (
+const Header = ({showNav, goBack}) => (
 	<header className={styles.container}>
+		{goBack && (
+			<Link href={goBack} passHref>
+				<img
+					className={styles.goBackButton}
+					src="/assets/go-back-arrow.svg"
+					alt="Volver"
+				/>
+			</Link>
+		)}
 		<img className={styles.img} src="/assets/logo.svg" alt="Logo" />
 		<h1 className={styles.title}>Tinder {showNav && 'de mascotas'}</h1>
 		{showNav && (
