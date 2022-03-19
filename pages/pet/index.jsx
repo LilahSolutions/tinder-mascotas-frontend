@@ -1,19 +1,23 @@
 import {useState, useEffect} from 'react';
+import {useRouter} from 'next/router';
 import {withAuth, usePets} from '../../utils/auth';
 import MatchServices from '../../services/MatchesServices';
 import styles from '../../styles/Pet.module.css';
 
 const Pet = ({token}) => {
 	const [matchers, setMatchers] = useState([]);
+	const router = useRouter();
 	const myPets = usePets();
-	const pet = myPets.find((pet) => pet.token === token);
+	const pet = myPets.find((pet) => pet.token === token) || {};
 
 	useEffect(() => {
 		const fetchMatchers = async () => {
 			const matchers = await MatchServices.getMyMatches(token);
 			setMatchers(matchers);
 		};
-		fetchMatchers();
+
+		if (!Object.keys(pet).length) router.replace('/pets');
+		else fetchMatchers();
 	}, []);
 
 	return (
