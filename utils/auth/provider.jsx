@@ -11,30 +11,30 @@ const mockUser = {
 };
 const pets = [
 	{
-		id: 1,
+		token: '1',
 		name: 'Jaskier',
-		gender: 'male',
+		sex: 'male',
 		type: 'cat',
-		photo: '/assets/cat-pic.jpg',
+		image: '/assets/cat-pic.jpg',
 	},
 	{
-		id: 2,
+		token: '2',
 		name: 'Jaskier',
-		gender: 'male',
+		sex: 'male',
 		type: 'cat',
-		photo: '/assets/cat-pic.jpg',
+		image: '/assets/cat-pic.jpg',
 	},
 	{
-		id: 3,
+		token: '3',
 		name: 'Jaskier',
-		gender: 'male',
+		sex: 'male',
 		type: 'cat',
-		photo: '/assets/cat-pic.jpg',
+		image: '/assets/cat-pic.jpg',
 	},
 ];
 
 const initialState = {isLoggedIn: true, user: mockUser, pets: pets}; ///
-// const initialState = {isLoggedIn: false, user: null, pets: null };
+// const initialState = {isLoggedIn: false, user: null, pets: [] };
 
 const reducer = (state, action) => {
 	switch (action.type) {
@@ -65,7 +65,7 @@ const LoginProvider = ({children}) => {
 	};
 
 	const updatePets = async () => {
-		const pets = await PetsServices.getAll(state.user.token);
+		const pets = await PetsServices.getAll();
 		dispatch('update-pets', pets);
 	};
 

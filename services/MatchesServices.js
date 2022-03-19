@@ -1,27 +1,28 @@
-const fetchAuth = async (endpoint, payload) => {
+const fetchMatches = async (endpoint, method, payload = {}) => {
 	try {
-		const res = await fetch(`/api/auth/${endpoint}`, {
+		const res = await fetch(`/api/matches/${endpoint}`, {
 			headers: {'Content-Type': 'application/json'},
-			method: 'post',
+			method: method,
 			mode: 'cors',
 			body: JSON.stringify(payload),
 		});
+
+		if (res.status !== 200) throw new Error();
 		const data = await res.json();
-		if (res.status !== 200) throw new Error('MESSAGE:' + data.error);
-		sessionStorage.setItem('sessionToken', data.token);
-		return {status: 'success', message: '', user: data};
-	} catch (error) {
-		const errorMessage = error.message.startsWith('MESSAGE:')
-			? error.message.slice(8) // error.message is a pretty string describing the error.
-			: 'Ha ocurrido un error';
-		return {status: 'error', message: errorMessage, user: {}};
+		if (data) return data; // Pets array.
+		return true; // Create successful.
+	} catch {
+		return method === 'get' ? [] : false; // Something went wrong.
 	}
 };
 
 const MatchServices = {
-	create: (payload) => fetchAuth('login', payload),
-	getPossibleMatches: (payload) => fetchAuth('login', payload),
-	getMyMatches: (payload) => fetchAuth('login', payload),
+	create: (payload) => fetchMatches('/', 'post', payload),
+	getPossibleMatches: (petToken) => fetchMatches(`/${petToken}`, 'get'),
+	getMyMatches: (petToken) => fetchMatches(`/${petToken}/my-matches`, 'get'),
 };
-/// All of these return values directly
+
+/// create: true/false indicating success.
+/// gets: petsArray / [].
+
 export default MatchServices;

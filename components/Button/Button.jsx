@@ -1,21 +1,35 @@
 import PropTypes from 'prop-types';
 import styles from './Button.module.css';
 
-const Button = ({handleClick, label, size, primary, className, disabled, isLoading, ...props}) => {
+const Button = ({
+	handleClick,
+	label,
+	size,
+	primary,
+	className,
+	disabled,
+	isLoading,
+	...props
+}) => {
 	return (
 		<button
-			className={[styles.button, styles[size], styles[primary? "primary":"secondary"], className].join(' ')}
+			className={[
+				styles.button,
+				styles[size],
+				styles[primary ? 'primary' : 'secondary'],
+				className,
+			].join(' ')}
 			onClick={handleClick}
-			disabled={isLoading || disabled} 
+			disabled={isLoading || disabled}
 			{...props}
-			>
-			{isLoading ? <span className={styles.loading}></span> : label} 
+		>
+			{isLoading ? <span className={styles.loading}></span> : label}
 		</button>
 	);
 };
 
 Button.propTypes = {
-	handleClick: PropTypes.func.isRequired,
+	handleClick: PropTypes.func,
 	label: PropTypes.string,
 	size: PropTypes.oneOf(['small', 'medium', 'large']),
 	className: PropTypes.string,
@@ -25,12 +39,13 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
+	handleClick: () => {},
 	className: '',
 	label: '',
 	size: 'medium',
 	primary: true,
 	disabled: false,
 	isLoading: false,
-}
+};
 
 export default Button;

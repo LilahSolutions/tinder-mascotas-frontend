@@ -8,6 +8,7 @@ const fetchAuth = async (endpoint, payload) => {
 		});
 		const data = await res.json();
 		if (res.status !== 200) throw new Error('MESSAGE:' + data.error);
+		sessionStorage.setItem('sessionToken', data && data.token);
 		return {status: 'success', message: '', user: data};
 	} catch (error) {
 		const errorMessage = error.message.startsWith('MESSAGE:')

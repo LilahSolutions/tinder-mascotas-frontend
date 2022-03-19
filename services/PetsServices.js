@@ -1,30 +1,31 @@
-const fetchAuth = async (endpoint, payload) => {
+const fetchPets = async (endpoint, method, payload = {}) => {
 	try {
-		const res = await fetch(`/api/auth/${endpoint}`, {
+		const res = await fetch(`/api/pets/${endpoint}`, {
 			headers: {'Content-Type': 'application/json'},
-			method: 'post',
+			method: method,
 			mode: 'cors',
 			body: JSON.stringify(payload),
 		});
+		if (res.status !== 200) throw new Error();
 		const data = await res.json();
-		if (res.status !== 200) throw new Error('MESSAGE:' + data.error);
-		sessionStorage.setItem('sessionToken', data.token);
-		return {status: 'success', message: '', user: data};
-	} catch (error) {
-		const errorMessage = error.message.startsWith('MESSAGE:')
-			? error.message.slice(8) // error.message is a pretty string describing the error.
-			: 'Ha ocurrido un error';
-		return {status: 'error', message: errorMessage, pet: {}};
+		if (data) return data; // Pet or pets array.
+		return true; // CRUD successful.
+	} catch {
+		return method === 'get' ? [] : false; // Something went wrong.
 	}
 };
 
+const getUserToken = () => sessionStorage.getItem('sessionToken');
+
 const PetsServices = {
-	create: (payload) => fetchAuth('login', payload),
-	update: (payload) => fetchAuth('login', payload),
-	delete: (payload) => fetchAuth('login', payload),
-	get: (payload) => fetchAuth('login', payload),
-	getAll: (payload) => fetchAuth('login', payload),
+	getAll: () => fetchPets(`/owner/${getUserToken()}`, 'get'),
+	get: (petToken) => fetchPets(`/${petToken}`, 'get'),
+	create: (payload) => fetchPets(`/owner/${getUserToken()}`, 'post', payload),
+	update: (petToken, payload) => fetchPets(`/${petToken}`, 'put', payload),
+	delete: (petToken) => fetchPets(`/${petToken}`, 'delete'),
 };
-// All CUD should trigger a new getAll. Get all sets the context.
+
+/// delete, update, create: true/false indicating success. If not error, component should call updatePets from context.
+/// gets: petObject / [].
 
 export default PetsServices;
