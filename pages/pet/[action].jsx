@@ -15,6 +15,7 @@ const MyPetAction = () => {
 		img: '',
 		type: '',
 		sex: '',
+		description: '',
 	});
 	const [currentImage, setCurrentImage] = useState(pet.img);
 	const [errors, setErrors] = useState([]);
@@ -81,12 +82,14 @@ const MyPetAction = () => {
 		}
 	};
 
-	const nameHandler = ({target: {value}}) => {
-		const errorIndex = errors.findIndex((e) => e !== 'nameField');
-		errors.splice(errorIndex, 1);
-		setErrors(errors);
+	const inputHandler = ({target: {value, name}}) => {
+		if (name === 'name') {
+			const errorIndex = errors.findIndex((e) => e !== 'nameField');
+			errors.splice(errorIndex, 1);
+			setErrors(errors);
+		}
 
-		setPet({...pet, name: value});
+		setPet({...pet, [name]: value});
 	};
 
 	const dropdownHandler = ({target: {value, name}}) =>
@@ -112,6 +115,7 @@ const MyPetAction = () => {
 
 		if (currentErrors.length === 0) {
 			//Backend stuff
+			console.log(pet);
 		} else {
 			setErrors(currentErrors);
 		}
@@ -138,9 +142,11 @@ const MyPetAction = () => {
 				hidden
 			/>
 			<Input
+				name="name"
 				type="text"
 				value={pet.name}
-				handleChange={(e) => nameHandler(e)}
+				placeholder="Nombre de tu mascota"
+				handleChange={(e) => inputHandler(e)}
 				size="medium"
 			/>
 			{hasErrors('nameField') && (
@@ -159,6 +165,14 @@ const MyPetAction = () => {
 				options={SEX_OPTIONS}
 				handleChange={(e) => dropdownHandler(e)}
 				size="medium"
+			/>
+			<textarea
+				name="description"
+				value={pet.description}
+				placeholder={`Contanos sobre ${pet.name || 'tu mascota'}`}
+				className={styles.descriptionArea}
+				maxLength={100}
+				onChange={(e) => inputHandler(e)}
 			/>
 			<Button
 				label={`¡${buttonLabels[action]} mascota!`}
