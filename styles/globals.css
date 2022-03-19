@@ -47,3 +47,9 @@ main:not(:last-child) {
 	font-weight: 500;
 	text-align: center;
 }
+
+@media screen and (max-width: 360px) {
+	html {
+		font-size: 15px;
+	}
+}
