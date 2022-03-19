@@ -63,3 +63,10 @@
 		transform: rotate(360deg);
 	}
 }
+
+@media screen and (min-width: 720px) {
+	.button{
+		height: 3rem;
+		font-size: 1.5rem;
+	}
+}

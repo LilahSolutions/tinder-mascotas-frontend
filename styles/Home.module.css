@@ -1,0 +1,8 @@
+@media screen and (min-width: 720px) {
+	.container{
+		display: flex;
+		flex-flow: column nowrap;
+		align-items: center;
+		justify-content: space-between;
+	}
+}
