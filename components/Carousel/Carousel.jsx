@@ -5,14 +5,14 @@ import {useSwipeable} from 'react-swipeable';
 import classNames from '../../utils/classNames';
 import {MESSAGE_IDS} from '../../services/config';
 
-export const CarouselItem = ({width, transform, name, img, description}) => {
+export const CarouselItem = ({width, transform, name, image, description}) => {
 	return (
 		<div
 			className={classNames(styles.carouselItem, styles.card)}
 			style={{width, transform, transition: 'transform .3s'}}
 		>
 			<h2 className={styles.itemName}>{name}</h2>
-			<img className={styles.itemImg} src={img} alt={name} />
+			<img className={styles.itemImg} src={image} alt={name} />
 			<div className={styles.itemDescriptionCtn}>
 				{description && (
 					<div className={styles.itemDescription}>

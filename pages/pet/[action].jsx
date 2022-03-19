@@ -12,11 +12,11 @@ import Dropdown from '../../components/Dropdown';
 const MyPetAction = ({action, token}) => {
 	const [pet, setPet] = useState({
 		name: '',
-		img: '',
+		image: '',
 		type: '',
 		sex: '',
 	});
-	const [currentImage, setCurrentImage] = useState(pet.img);
+	const [currentImage, setCurrentImage] = useState(pet.image);
 	const [errors, setErrors] = useState([]);
 	const inputRef = useRef(null);
 	const imgRef = useRef(null);
@@ -100,11 +100,14 @@ const MyPetAction = ({action, token}) => {
 		const currentErrors = validateErrors();
 
 		if (currentErrors.length === 0) {
-			// const success = await PetsServices.update(token, payload);
-			// const success = await PetsServices.create(payload);
-			// if (success) await updatePets();
-			// else alert('¡Oops! Hubo un error.');
-			console.log('Hola');
+			let success;
+			if (actions === 'edit') {
+				success = await PetsServices.update(token, payload);
+			} else {
+				success = await PetsServices.create(payload);
+			}
+			if (success) await updatePets();
+			else alert('¡Oops! Hubo un error.');
 		} else {
 			setErrors(currentErrors);
 		}
