@@ -8,13 +8,13 @@ function Profile() {
 	return (
 		<main className={styles.container}>
 			<h2 className="box">Mi perfil</h2>
-			<img className={styles.photo} src={user.photo} alt="Foto de perfil" />
+			<img className={styles.photo} src={user.image} alt="Foto de perfil" />
 			<div className={styles.dataContainer}>
 				<h4>
 					Nombre: <span>{user.name}</span>
 				</h4>
 				<h4>
-					Apellido: <span>{user.lastname}</span>
+					Apellido: <span>{user.lastName}</span>
 				</h4>
 				<h4>
 					Correo electrónico: <span>{user.email}</span>

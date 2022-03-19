@@ -2,7 +2,7 @@ import {withAuth, usePets, useUser} from '../../utils/auth';
 import styles from '../../styles/Pet.module.css';
 
 const Pets = () => {
-	const user = useUser();
+	const {email} = useUser();
 	const pets = usePets(); // Get the real pets from the BE.
 	const pet = {
 		name: 'Jaskier',
@@ -44,7 +44,7 @@ const Pets = () => {
 								Tipo: <span>{pet.type}</span>
 							</h4>
 							<h4>
-								Mail del dueño: <span>{user.email}</span>
+								Mail del dueño: <span>{email}</span>
 							</h4>
 						</div>
 					</li>
