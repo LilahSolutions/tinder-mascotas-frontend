@@ -45,7 +45,7 @@ const Pets = () => {
 							<Link href={`/pet?id=${pet.token}`} passHref>
 								<Button label="Ver" size="small" />
 							</Link>
-							<Link href="/pet/edit" passHref>
+							<Link href={`/pet/edit?id=${pet.token}`} passHref>
 								<Button label="Modificar" size="small" />
 							</Link>
 							<Button

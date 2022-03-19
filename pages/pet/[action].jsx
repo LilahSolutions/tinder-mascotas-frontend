@@ -1,15 +1,15 @@
 import {useRouter} from 'next/router';
 import {useEffect, useState, useRef} from 'react';
-import {withAuth} from '../../utils/auth';
+import {usePets, withAuth} from '../../utils/auth';
 import MessageBar from '../../components/MessageBar/MessageBar';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import PetsServices from '../../services/PetsServices';
 import {TYPE_OPTIONS, SEX_OPTIONS} from '../../services/config';
 import styles from '../../styles/pet-actions.module.css';
 import Dropdown from '../../components/Dropdown';
 
-const MyPetAction = () => {
-	const [action, setAction] = useState('');
+const MyPetAction = ({action, token}) => {
 	const [pet, setPet] = useState({
 		name: '',
 		img: '',
@@ -20,6 +20,7 @@ const MyPetAction = () => {
 	const [errors, setErrors] = useState([]);
 	const inputRef = useRef(null);
 	const imgRef = useRef(null);
+	const myPets = usePets();
 	const router = useRouter();
 
 	const actions = {
@@ -33,29 +34,17 @@ const MyPetAction = () => {
 	};
 
 	useEffect(() => {
+		if (!['add', 'edit'].includes(action)) router.push('/');
 		if (action === 'edit') {
-			//Backend stuff
-			const mockedPet = {
-				name: 'Pancho',
-				type: 'Tortuga',
-				img: 'https://www.collinsdictionary.com/images/full/dog_230497594.jpg',
-				sex: 'Hembra',
-			};
-
-			setPet(mockedPet);
-			setCurrentImage(mockedPet.img);
+			const pet = myPets.find((pet) => pet.token === token);
+			if (!pet) {
+				router.push('/');
+				return;
+			}
+			setPet(pet);
+			setCurrentImage(pet.image);
 		}
-	}, [action]);
-
-	useEffect(() => {
-		if (
-			router.isReady &&
-			!router.asPath.endsWith('add') &&
-			!router.asPath.endsWith('edit')
-		)
-			router.push('/');
-		else setAction(router.query.action);
-	}, [router]);
+	}, []);
 
 	const selectImg = () => {
 		inputRef.current.click();
@@ -107,11 +96,15 @@ const MyPetAction = () => {
 		return auxErrors;
 	};
 
-	const savePet = () => {
+	const savePet = async () => {
 		const currentErrors = validateErrors();
 
 		if (currentErrors.length === 0) {
-			//Backend stuff
+			// const success = await PetsServices.update(token, payload);
+			// const success = await PetsServices.create(payload);
+			// if (success) await updatePets();
+			// else alert('¡Oops! Hubo un error.');
+			console.log('Hola');
 		} else {
 			setErrors(currentErrors);
 		}
@@ -169,6 +162,11 @@ const MyPetAction = () => {
 		</div>
 	);
 };
+
+export async function getServerSideProps({query}) {
+	const {action, id} = query;
+	return {props: {action, token: id || ''}};
+}
 
 const Component = withAuth(MyPetAction);
 Component.goBack = '/pets';
