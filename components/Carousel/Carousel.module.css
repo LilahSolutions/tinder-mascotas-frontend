@@ -1,6 +1,6 @@
 .carousel{
-	overflow: hidden;
 	touch-action: pan-y;
+	position: relative;
 }
 
 .carouselInner{
@@ -14,7 +14,8 @@
 	align-items: center;
 	justify-content: space-evenly;
 	margin: 0 10% 0 0%;
-	height: 20rem;
+	width: 60%;
+	height: 16rem;
 }
 
 .card{
@@ -41,10 +42,11 @@
 
 .itemName{
 	text-align: center;
+	margin: 0;
 }
 
 .itemImg{
-	width: 50%;
+	width: 40%;
 	max-width: 150px;
 }
 
@@ -55,7 +57,6 @@
 	height: 35%;
 	white-space: normal;
 	font-size: .9rem;
-	padding-top: 5%;
 }
 
 .descriptionTitle{
@@ -69,4 +70,47 @@
 
 .itemDescription{
 	margin-top: 5%;
+}
+
+.carouselArrowsContainer{
+	display:none;
+}
+
+@media screen and (min-height: 700px){
+	.carouselItem{
+		height: 20rem;
+	}
+
+	.itemImg{
+		width: 50%;
+	}
+}
+
+@media screen and (min-width: 720px) {
+	.carouselItem{
+		height: max-content;
+		width: 20%;
+		padding: 2.5rem 0;
+	}
+
+	.carouselItem:first-child{
+		margin: 0 10% 0 40%;
+	}
+
+	.carouselArrowsContainer{
+		display: flex;
+    width: 30%;
+    left: 35%;
+		top: 30%;
+    justify-content: space-between;
+    padding: 1rem 0;
+		position: absolute;
+	}
+
+	.carouselArrow{
+		width: 3rem;
+		cursor: pointer;
+		border-radius: 10%;
+		background-color: var(--main-color);
+	}
 }

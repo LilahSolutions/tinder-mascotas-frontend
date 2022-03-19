@@ -13,7 +13,7 @@
 }
 
 .petBubble{
-	width: 4rem;
+	width: 3rem;
 	margin-right: 1.5rem;
 	display: flex;
 	flex-flow: column nowrap;
@@ -21,8 +21,8 @@
 }
 
 .petImg{
-	width: 4rem;
-	height: 4rem;
+	width: 3rem;
+	height: 3rem;
 	object-fit: cover;
 	border-radius: 50%;
 	border: 2px gainsboro solid;
@@ -37,4 +37,32 @@
 	border: 2px var(--main-color) solid;
 	padding: .3rem;
 	background-color: gainsboro;
+}
+
+@media screen and (min-height: 700px){
+	.petImg{
+		width: 4rem;
+		height: 4rem;
+	}
+
+	.petBubble{
+		width: 4rem
+	}
+}
+
+@media screen and (min-width: 720px){
+	.petSelectorContainer{
+		width: max-content;
+		position: relative;
+		padding: 0;
+		max-width: 704px;
+		margin: 2rem auto 0 auto;
+		flex-flow: row nowrap;
+		justify-content: center;
+	}
+
+	.petBubble{
+		margin: 0 1rem;
+		cursor: pointer;
+	}
 }

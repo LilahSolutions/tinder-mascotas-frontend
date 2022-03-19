@@ -13,3 +13,14 @@
 	color: white;
 	font-size: 1.3rem;
 }
+
+@media screen and (min-width: 720px) {
+	.messageBar{
+		width: 50%;
+		height: 5rem;
+	}
+
+	.message{
+		font-size: 2.6rem;
+	}
+}

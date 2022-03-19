@@ -19,3 +19,10 @@
 .large {
 	width: 100%;
 }
+
+@media screen and (min-width: 720px) {
+	.dropdown{
+		height: 3rem;
+		font-size: 1.5rem;
+	}
+}

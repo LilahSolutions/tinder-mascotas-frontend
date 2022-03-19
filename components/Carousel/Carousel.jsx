@@ -5,19 +5,12 @@ import { useSwipeable } from 'react-swipeable'
 import classNames from '../../utils/classNames'
 import { MESSAGE_IDS } from '../../services/config'
 
-export const CarouselItem = ({width, transform, name, img, race, description}) => {
+export const CarouselItem = ({width, transform, name, img, description}) => {
 	return (
 		<div className={classNames(styles.carouselItem, styles.card)} style={{width, transform, transition: 'transform .3s'}}>
 			<h2 className={styles.itemName}>{name}</h2>
 			<img className={styles.itemImg} src={img} alt={name}/>
 			<div className={styles.itemDescriptionCtn}>
-				{
-					race &&
-					<div>
-						<span className={styles.descriptionTitle}>Raza: </span>
-						<span>{race}</span>
-					</div>
-				}
 				{
 					description && 
 					<div className={styles.itemDescription}>
@@ -51,6 +44,8 @@ export const NoCarousel = ({ messageId }) => {
 
 const Carousel = ({children, activeIndex, setActiveIndex}) => {
 
+	const { innerWidth: width } = window;
+
 	const updateIndex = (newIndex) => {
 		if(newIndex < 0){
 			newIndex = 0
@@ -66,19 +61,28 @@ const Carousel = ({children, activeIndex, setActiveIndex}) => {
 		onSwipedRight: () => updateIndex(activeIndex - 1),
 	})
 
+	const translateValue = width < 720 ? 70 : 30;
+
 	return (
 		<div className={styles.carousel} {...swipeHandlers}>
-			<div className={styles.carouselInner} style={{transform: `translate(${-activeIndex*70}%)`}}>
+			<div className={styles.carouselInner} style={{transform: `translate(${-activeIndex*translateValue}%)`}}>
 				{/* Should always use this method instead of maps to traverse React children */}
 				{React.Children.map(children, (child, index) => 
 					React.cloneElement(
 						child, 
 						{
-							width: '60%', 
 							transform: `scale(${index === activeIndex ? '1' : '0.9'})`,
 						}
 					)
 				)}
+			</div>
+			<div className={styles.carouselArrowsContainer}>
+				<span className={classNames(styles.carouselArrow, styles.arrowLeft)} onClick={() => updateIndex(activeIndex - 1)}>
+					<img src="/assets/chevron-left.svg" alt="left arrow" />
+				</span>
+				<span className={classNames(styles.carouselArrow, styles.arrowRight)} onClick={() => updateIndex(activeIndex + 1)}>
+				<img src="/assets/chevron-right.svg" alt="right arrow" />
+				</span>
 			</div>
 		</div>
 	)
