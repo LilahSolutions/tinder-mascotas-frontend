@@ -54,7 +54,7 @@ const LoginProvider = ({children}) => {
 		const {status, message, user} = await AuthServices.login(data);
 		if (status === 'error') return message;
 		dispatch({type: 'login', value: user});
-		router.replace('/home');
+		router.replace('/');
 	};
 
 	const register = async (data) => {

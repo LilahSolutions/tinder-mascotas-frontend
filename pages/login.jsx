@@ -13,7 +13,7 @@ const Login = () => {
 	const router = useRouter();
 
 	useEffect(() => {
-		router.prefetch('/home');
+		router.prefetch('/');
 	}, []);
 
 	const handleChange = (e) => {

@@ -27,7 +27,7 @@ const Register = () => {
 	const router = useRouter();
 
 	useEffect(() => {
-		router.prefetch('/home');
+		router.prefetch('/');
 	}, []);
 
 	const handleChange = (e) => {
