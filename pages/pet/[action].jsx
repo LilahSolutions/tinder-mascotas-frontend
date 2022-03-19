@@ -81,10 +81,7 @@ const MyPetAction = ({action, token}) => {
 	const dropdownHandler = ({target: {value, name}}) =>
 		setPet({...pet, [name]: value});
 
-	const hasErrors = (field) => {
-		console.log(errors.includes(field));
-		return errors.includes(field);
-	};
+	const hasErrors = (field) => errors.includes(field);
 
 	const validateErrors = () => {
 		const auxErrors = [];
@@ -102,9 +99,9 @@ const MyPetAction = ({action, token}) => {
 		if (currentErrors.length === 0) {
 			let success;
 			if (actions === 'edit') {
-				success = await PetsServices.update(token, payload);
+				success = await PetsServices.update(token, pet);
 			} else {
-				success = await PetsServices.create(payload);
+				success = await PetsServices.create(pet);
 			}
 			if (success) await updatePets();
 			else alert('¡Oops! Hubo un error.');
