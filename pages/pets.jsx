@@ -39,7 +39,7 @@ const Pets = () => {
 							</h4>
 						</div>
 						<div className={styles.buttonsContainer}>
-							<Link href={`/pets/${pet.id}`} passHref>
+							<Link href={`/pet?id=${pet.id}`} passHref>
 								<Button label="Ver" size="small" />
 							</Link>
 							<Link href="/pet/edit" passHref>
