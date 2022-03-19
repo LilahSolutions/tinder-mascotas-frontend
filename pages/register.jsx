@@ -1,13 +1,13 @@
 import {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
+import {useLoginContext} from '../utils/auth';
 import Button from '../components/Button';
 import Input from '../components/Input';
-import AuthServices, {useLoginContext} from '/services/AuthServices';
 import styles from '../styles/Login.module.css';
 
 const fields = [
 	{id: 'name', label: 'Nombre', type: 'text'},
-	{id: 'lastname', label: 'Apellido', type: 'text'},
+	{id: 'lastName', label: 'Apellido', type: 'text'},
 	{id: 'email', label: 'Email', type: 'email'},
 	{id: 'password', label: 'Contraseña', type: 'password'},
 	{id: 'passwordRepeat', label: 'Repetir contraseña', type: 'password'},
@@ -16,14 +16,14 @@ const fields = [
 const Register = () => {
 	const [form, setForm] = useState({
 		name: '',
-		lastname: '',
+		lastName: '',
 		email: '',
 		password: '',
 		passwordRepeat: '',
 	});
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
-	const {dispatch} = useLoginContext();
+	const {register} = useLoginContext();
 	const router = useRouter();
 
 	useEffect(() => {
@@ -45,7 +45,7 @@ const Register = () => {
 			return 'Las contraseñas deben coincidir';
 	};
 
-	const handleLogin = async () => {
+	const handleRegister = async () => {
 		const error = validateErrors();
 		if (error) {
 			setError(error);
@@ -54,13 +54,8 @@ const Register = () => {
 
 		setLoading(true);
 		const {passwordRepeat, ...payload} = form;
-		const {status, message, user} = await AuthServices.signin(payload);
-		if (status === 'error') setError(message);
-		else if (status === 'success') {
-			setError('');
-			dispatch({type: 'login', value: user});
-			router.replace('/home');
-		}
+		const registerError = await register(payload);
+		setError(registerError ? registerError : '');
 		setLoading(false);
 	};
 
@@ -82,7 +77,7 @@ const Register = () => {
 			<Button
 				disabled={loading}
 				label="Registrar"
-				handleClick={handleLogin}
+				handleClick={handleRegister}
 				size="large"
 			/>
 		</main>

@@ -1,15 +1,15 @@
 import {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
+import {useLoginContext} from '../utils/auth';
 import Button from '../components/Button';
 import Input from '../components/Input';
-import AuthServices, {useLoginContext} from '/services/AuthServices';
 import styles from '../styles/Login.module.css';
 
 const Login = () => {
 	const [form, setForm] = useState({user: '', password: ''});
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
-	const {dispatch} = useLoginContext();
+	const {login} = useLoginContext();
 	const router = useRouter();
 
 	useEffect(() => {
@@ -23,13 +23,8 @@ const Login = () => {
 
 	const handleLogin = async () => {
 		setLoading(true);
-		const {status, message, user} = await AuthServices.login(form);
-		if (status === 'error') setError(message);
-		else if (status === 'success') {
-			setError('');
-			dispatch({type: 'login', value: user});
-			router.replace('/home');
-		}
+		const error = await login(form);
+		setError(error ? error : '');
 		setLoading(false);
 	};
 

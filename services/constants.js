@@ -1,5 +1,9 @@
-export const API_AUTH_BASE_URL = 'hola';
-export const API_BASE_URL = 'hola';
+export const API_AUTH_BASE_URL =
+	'https://urbi.lilasolutions.com.ar/api/tinder-users';
+export const API_PETS_BASE_URL =
+	'https://urbi.lilasolutions.com.ar/api/tinder-pets';
+export const API_MATCHES_BASE_URL =
+	'https://urbi.lilasolutions.com.ar/api/tinder-matches';
 
 export const TABS = [
 	{key: 'pets', route: '/pets', img: 'icon-pets.svg', title: 'mascotas'},

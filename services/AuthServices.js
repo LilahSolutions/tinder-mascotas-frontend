@@ -1,29 +1,25 @@
-const fetchAuth = async (url, payload = {}, method = 'get') => {
+const fetchAuth = async (endpoint, payload) => {
 	try {
-		const res = await fetch(url, {
+		const res = await fetch(`/api/auth/${endpoint}`, {
 			headers: {'Content-Type': 'application/json'},
-			method: method,
+			method: 'post',
 			mode: 'cors',
 			body: JSON.stringify(payload),
 		});
 		const data = await res.json();
 		if (res.status !== 200) throw new Error('MESSAGE:' + data.error);
-		sessionStorage.setItem('sessionToken', data.token);
 		return {status: 'success', message: '', user: data};
 	} catch (error) {
 		const errorMessage = error.message.startsWith('MESSAGE:')
 			? error.message.slice(8) // error.message is a pretty string describing the error.
 			: 'Ha ocurrido un error';
-		return {status: 'error', message: errorMessage, user: {}};
+		return {status: 'error', message: errorMessage, user: null};
 	}
 };
 
 const AuthServices = {
-	login: (payload) => fetchAuth('/api/auth/login', payload, 'post'),
-	signin: (payload) => fetchAuth('/api/auth/signin', payload, 'post'),
-	getUserByToken: (token) => fetchAuth(`/api/auth?token=${token}`),
+	login: (payload) => fetchAuth('login', payload),
+	register: (payload) => fetchAuth('register', payload),
 };
 
 export default AuthServices;
-
-export const useLoginContext = () => ({dispatch: () => {}});
