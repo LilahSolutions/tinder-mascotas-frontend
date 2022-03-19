@@ -5,7 +5,7 @@ import AuthServices from '../../services/AuthServices';
 
 const mockUser = {
 	name: 'Ro',
-	lastname: 'Mena',
+	lastName: 'Mena',
 	email: 'r@lila.com',
 	photo: '/assets/cat-pic.jpg',
 };
