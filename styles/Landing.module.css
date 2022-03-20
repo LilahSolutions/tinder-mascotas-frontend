@@ -1,6 +1,5 @@
 .container {
 	padding: 0rem 1rem;
-	max-height: calc(100vh - 3rem);
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
@@ -12,16 +11,18 @@
 .subtitle {
 	text-align: center;
 	font-weight: 500;
+	max-width: 400px;
+	margin: 1.5rem auto;
 }
 
 .icon {
-	width: 3rem;
+	width: 3em;
 	display: block;
 }
 
 .titlesContainer {
 	width: 100%;
-	max-width: 400px;
+	max-width: 700px;
 }
 
 .buttonsContainer {
@@ -29,7 +30,7 @@
 	margin: 1rem auto;
 	display: flex;
 	flex-flow: row nowrap;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 }
 
@@ -43,4 +44,10 @@
 	max-width: 400px;
 	max-height: 350px;
 	object-fit: cover;
+}
+
+@media screen and (min-width: 1024px) {
+	.container {
+		font-size: 20px;
+	}
 }
