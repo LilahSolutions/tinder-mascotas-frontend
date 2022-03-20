@@ -8,7 +8,7 @@ const fetchMatches = async (endpoint, method, payload = {}) => {
 		});
 
 		if (res.status !== 200) throw new Error();
-		const data = await res.json();
+		const {data} = await res.json();
 		if (data) return data; // Pets array.
 		return true; // Create successful.
 	} catch {

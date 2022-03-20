@@ -4,10 +4,10 @@ const fetchPets = async (endpoint, method, payload = {}) => {
 			headers: {'Content-Type': 'application/json'},
 			method: method,
 			mode: 'cors',
-			body: JSON.stringify(payload),
+			body: method !== 'get' ? JSON.stringify(payload) : undefined,
 		});
 		if (res.status !== 200) throw new Error();
-		const data = await res.json();
+		const {data} = await res.json();
 		if (data) return data; // Pet or pets array.
 		return true; // CRUD successful.
 	} catch {
