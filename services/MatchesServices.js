@@ -4,7 +4,7 @@ const fetchMatches = async (endpoint, method, payload = {}) => {
 			headers: {'Content-Type': 'application/json'},
 			method: method,
 			mode: 'cors',
-			body: JSON.stringify(payload),
+			body: method !== 'get' ? JSON.stringify(payload) : undefined,
 		});
 
 		if (res.status !== 200) throw new Error();
@@ -17,7 +17,7 @@ const fetchMatches = async (endpoint, method, payload = {}) => {
 };
 
 const MatchServices = {
-	create: (payload) => fetchMatches('/', 'post', payload),
+	create: (payload) => fetchMatches('/create', 'post', payload),
 	getPossibleMatches: (petToken) => fetchMatches(`/${petToken}`, 'get'),
 	getMyMatches: (petToken) => fetchMatches(`/${petToken}/my-matches`, 'get'),
 };

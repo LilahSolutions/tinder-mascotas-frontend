@@ -18,8 +18,13 @@ function Home() {
 	const [matchedPets, setMatchedPets] = useState([]);
 	const myPets = usePets();
 
-	const likeHandler = () => {
-		console.log('Le diste like a', matchedPets[activeIndex].name);
+	const likeHandler = async () => {
+		const success = await MatchServices.create({
+			matcher: myPets[activePet].token,
+			matched: matchedPets[activeIndex].token,
+		});
+		if (success) console.log('Le diste like a', matchedPets[activeIndex].name);
+		else alert('¡Oops! Hubo un error, no se pudo crear el match.');
 	};
 
 	const getMatches = async () => {
@@ -28,10 +33,6 @@ function Home() {
 		);
 		setMatchedPets(matches);
 	};
-
-	useEffect(() => {
-		getMatches();
-	}, []);
 
 	useEffect(() => {
 		getMatches();
