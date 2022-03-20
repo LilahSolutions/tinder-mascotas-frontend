@@ -1,12 +1,12 @@
-.petActionContainer{
+.petActionContainer {
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
 	justify-content: space-around;
-	height: 60%;
+	height: 80%;
 }
 
-.addImg{
+.addImg {
 	border: 3px var(--main-color) solid;
 	border-radius: 50%;
 	height: 10rem;
@@ -15,21 +15,39 @@
 	object-fit: cover;
 }
 
-.plusIcon{
+.plusIcon {
 	padding: 2rem;
 }
 
-.error{
+.error {
 	color: red;
-	font-size: .9rem;
+	font-size: 0.9rem;
+}
+
+.descriptionArea {
+	width: 70%;
+	height: 4rem;
+	resize: none;
+	background: #fffdfd;
+	border: 0.2px solid #cac8c8;
+	box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 3px;
+	margin: 0.3rem;
+	padding: 0.3rem 0.5rem;
+	font-family: inherit;
+	min-height: 70px;
 }
 
 @media screen and (min-width: 720px) {
-	.petActionContainer{
+	.petActionContainer {
 		height: 80%;
 	}
 
-	.addImg{
+	.descriptionArea {
+		font-size: 1.3rem;
+	}
+
+	.addImg {
 		width: 15rem;
 		height: 15rem;
 	}
