@@ -7,7 +7,7 @@ const descriptions = {
 	default: 'Ha ocurrido un error', // 400 or 500.
 };
 
-export default handler = async ({method, endpoint, body}, resToFront) => {
+const handler = async ({method, query: {endpoint}, body}, resToFront) => {
 	try {
 		switch (method.toUpperCase()) {
 			case 'POST': {
@@ -22,8 +22,8 @@ export default handler = async ({method, endpoint, body}, resToFront) => {
 					return resToFront.status(resFromBack.status).json({
 						error: descriptions[resFromBack.status] || descriptions.default,
 					});
-				const {data: user} = await resFromBack.json(); /// Does this crash in register?
-				return resToFront.status(200).json(user || null);
+				const {Data: user} = await resFromBack.json();
+				return resToFront.status(200).json({user});
 			}
 			default:
 				return resToFront.status(405).json({error: descriptions.default});
@@ -32,3 +32,5 @@ export default handler = async ({method, endpoint, body}, resToFront) => {
 		resToFront.status(500).json({error: descriptions.default});
 	}
 };
+
+export default handler;

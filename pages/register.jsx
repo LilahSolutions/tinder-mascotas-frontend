@@ -21,7 +21,7 @@ const Register = () => {
 		password: '',
 		passwordRepeat: '',
 	});
-	const [error, setError] = useState('');
+	const [message, setMessage] = useState({type: 'error', value: ''});
 	const [loading, setLoading] = useState(false);
 	const {register} = useLoginContext();
 	const router = useRouter();
@@ -36,7 +36,6 @@ const Register = () => {
 	};
 
 	const validateErrors = () => {
-		console.log(form);
 		if (Object.values(form).some((value) => value === ''))
 			return 'Todos los campos son obligatorios';
 		if (!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(form.email))
@@ -48,21 +47,25 @@ const Register = () => {
 	const handleRegister = async () => {
 		const error = validateErrors();
 		if (error) {
-			setError(error);
+			setMessage({type: 'error', value: error});
 			return;
 		}
 
 		setLoading(true);
 		const {passwordRepeat, ...payload} = form;
 		const registerError = await register(payload);
-		setError(registerError ? registerError : '');
+		setMessage(
+			registerError
+				? {type: 'error', value: registerError}
+				: {type: 'success', value: 'Usuario creado exitosamente'}
+		);
 		setLoading(false);
 	};
 
 	return (
 		<main className={styles.main}>
 			<h2 className={styles.title}>Registrarse</h2>
-			{error && <p className={styles.error}>{error}</p>}
+			{message.value && <p className={styles[message.type]}>{message.value}</p>}
 			{fields.map(({id, label, type}) => (
 				<Input
 					key={id}

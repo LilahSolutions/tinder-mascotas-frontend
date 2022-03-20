@@ -6,7 +6,7 @@ import Input from '../components/Input';
 import styles from '../styles/Login.module.css';
 
 const Login = () => {
-	const [form, setForm] = useState({user: '', password: ''});
+	const [form, setForm] = useState({email: '', password: ''});
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const {login} = useLoginContext();
@@ -35,8 +35,8 @@ const Login = () => {
 			<Input
 				className={styles.input}
 				placeholder="Email"
-				name="user"
-				value={form.user}
+				name="email"
+				value={form.email}
 				handleChange={handleChange}
 			/>
 			<Input

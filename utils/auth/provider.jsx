@@ -59,9 +59,10 @@ const LoginProvider = ({children}) => {
 
 	const register = async (data) => {
 		const {status, message} = await AuthServices.register(data);
-		if (status === 'success')
-			await login({user: data.user, password: user.password});
-		else return message;
+		if (status === 'success') {
+			const {email, password} = data;
+			await login({email, password});
+		} else return message;
 	};
 
 	const updatePets = async () => {
