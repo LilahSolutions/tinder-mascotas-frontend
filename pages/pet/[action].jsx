@@ -6,6 +6,9 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import PetsServices from '../../services/PetsServices';
 import {TYPE_OPTIONS, SEX_OPTIONS} from '../../services/config';
+import firebase from '../../services/firebase/firebase';
+// import {getFirestore, collection, getDocs} from 'firebase/firestore/lite';
+import {getStorage, ref, uploadBytes, getDownloadURL} from 'firebase/storage';
 import styles from '../../styles/pet-actions.module.css';
 import Dropdown from '../../components/Dropdown';
 
@@ -21,7 +24,7 @@ const MyPetAction = ({action, token}) => {
 	const [errors, setErrors] = useState([]);
 	const inputRef = useRef(null);
 	const imgRef = useRef(null);
-	const {pets: myPets, updatePets} = useLoginContext();
+	const {pets: myPets, updatePets, user} = useLoginContext();
 	const router = useRouter();
 
 	const actions = {
@@ -33,6 +36,9 @@ const MyPetAction = ({action, token}) => {
 		add: 'Añadir',
 		edit: 'Actualizar',
 	};
+
+	// const database = getFirestore(firebase);
+	const storage = getStorage(firebase);
 
 	useEffect(() => {
 		if (!['add', 'edit'].includes(action)) router.push('/');
@@ -101,6 +107,7 @@ const MyPetAction = ({action, token}) => {
 
 		if (currentErrors.length === 0) {
 			let success;
+<<<<<<< Updated upstream
 			if (action === 'edit') {
 				success = await PetsServices.update(token, pet);
 			} else {
@@ -110,6 +117,33 @@ const MyPetAction = ({action, token}) => {
 				await updatePets();
 				router.push('/pets');
 			} else alert('¡Oops! Hubo un error.');
+=======
+			const imageRef = ref(
+				storage,
+				`${user.token}-${pet.name.replaceAll(' ', '+')}.jpg`
+			);
+
+			uploadBytes(imageRef, currentImage).then((snapshot) => {
+				console.log('Uploaded to storage');
+				getDownloadURL(imageRef).then(async (url) => {
+					if (action === 'edit') {
+						success = await PetsServices.update(user.token, {
+							...pet,
+							image: url,
+						});
+					} else {
+						success = await PetsServices.create({
+							...pet,
+							image: url,
+						});
+					}
+					if (success) {
+						await updatePets();
+						router.push('/pets');
+					} else alert('¡Oops! Hubo un error.');
+				});
+			});
+>>>>>>> Stashed changes
 		} else {
 			setErrors(currentErrors);
 		}
