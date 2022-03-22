@@ -25,16 +25,17 @@ function Home() {
 		});
 		if (success) {
 			const auxMatchedPets = matchedPets;
-			auxMatchedPets.splice(activePet, 1);
+			auxMatchedPets.splice(activeIndex, 1);
 			setMatchedPets(auxMatchedPets);
 		} else alert('¡Oops! Hubo un error, no se pudo crear el match.');
 	};
 
 	const getMatches = async () => {
-		const matches = await MatchServices.getPossibleMatches(
-			myPets[activePet].token
-		);
-		setMatchedPets(matches);
+		const currentPet = myPets[activePet];
+		if (currentPet) {
+			const matches = await MatchServices.getPossibleMatches(currentPet.token);
+			setMatchedPets(matches);
+		}
 	};
 
 	useEffect(() => {

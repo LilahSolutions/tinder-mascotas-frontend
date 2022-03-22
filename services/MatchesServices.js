@@ -1,6 +1,6 @@
 const fetchMatches = async (endpoint, method, payload = {}) => {
 	try {
-		const res = await fetch(`/api/matches/${endpoint}`, {
+		const res = await fetch(`/api/matches${endpoint}`, {
 			headers: {'Content-Type': 'application/json'},
 			method: method,
 			mode: 'cors',
@@ -9,7 +9,7 @@ const fetchMatches = async (endpoint, method, payload = {}) => {
 
 		if (res.status !== 200) throw new Error();
 		const {data} = await res.json();
-		if (data) return data; // Pets array.
+		if (data !== undefined) return data; // Pets array.
 		return true; // Create successful.
 	} catch {
 		return method === 'get' ? [] : false; // Something went wrong.

@@ -9,11 +9,11 @@ const handler = async ({method, query: {endpoint}, body}, resToFront) => {
 				if (resFromBack.status !== 200)
 					return resToFront.status(resFromBack.status).json();
 				const {Data} = await resFromBack.json();
-				return resToFront.status(200).json({data: Data.WhoMatchedMe || Data});
+				return resToFront.status(200).json({data: Data.whoMatchedMe || Data});
 			}
 			case 'POST': {
 				const {matcher, matched} = body;
-				const url = `${API_PETS_BASE_URL}?matcher=${matcher}&matched=${matched}}`;
+				const url = `${API_MATCHES_BASE_URL}?matcher=${matcher}&matched=${matched}`;
 				const resFromBack = await fetch(url, {
 					headers: {'Content-Type': 'application/json'},
 					method: 'post',
