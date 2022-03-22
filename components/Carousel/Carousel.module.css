@@ -98,6 +98,11 @@
 		margin: 0 10% 0 40%;
 	}
 
+	.noCarousel {
+		width: 30%;
+		padding: 1rem;
+	}
+
 	.carouselArrowsContainer {
 		display: flex;
 		width: 30%;

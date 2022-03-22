@@ -13,8 +13,8 @@ const MyPetAction = ({action, token}) => {
 	const [pet, setPet] = useState({
 		name: '',
 		image: '',
-		type: '',
-		sex: '',
+		type: 'Perro',
+		sex: 'Macho',
 		description: '',
 	});
 	const [currentImage, setCurrentImage] = useState(pet.image);
@@ -102,9 +102,12 @@ const MyPetAction = ({action, token}) => {
 		if (currentErrors.length === 0) {
 			let success;
 			if (action === 'edit') {
-				success = await PetsServices.update(token, pet);
+				success = await PetsServices.update(token, {
+					...pet,
+					image: currentImage,
+				});
 			} else {
-				success = await PetsServices.create(pet);
+				success = await PetsServices.create({...pet, image: currentImage});
 			}
 			if (success) {
 				await updatePets();
