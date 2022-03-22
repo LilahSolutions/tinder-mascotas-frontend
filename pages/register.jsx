@@ -1,13 +1,13 @@
 import {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
+import {useLoginContext} from '../utils/auth';
 import Button from '../components/Button';
 import Input from '../components/Input';
-import AuthServices, {useLoginContext} from '/services/AuthServices';
 import styles from '../styles/Login.module.css';
 
 const fields = [
 	{id: 'name', label: 'Nombre', type: 'text'},
-	{id: 'lastname', label: 'Apellido', type: 'text'},
+	{id: 'lastName', label: 'Apellido', type: 'text'},
 	{id: 'email', label: 'Email', type: 'email'},
 	{id: 'password', label: 'Contraseña', type: 'password'},
 	{id: 'passwordRepeat', label: 'Repetir contraseña', type: 'password'},
@@ -16,18 +16,18 @@ const fields = [
 const Register = () => {
 	const [form, setForm] = useState({
 		name: '',
-		lastname: '',
+		lastName: '',
 		email: '',
 		password: '',
 		passwordRepeat: '',
 	});
-	const [error, setError] = useState('');
+	const [message, setMessage] = useState({type: 'error', value: ''});
 	const [loading, setLoading] = useState(false);
-	const {dispatch} = useLoginContext();
+	const {register} = useLoginContext();
 	const router = useRouter();
 
 	useEffect(() => {
-		router.prefetch('/home');
+		router.prefetch('/');
 	}, []);
 
 	const handleChange = (e) => {
@@ -36,7 +36,6 @@ const Register = () => {
 	};
 
 	const validateErrors = () => {
-		console.log(form);
 		if (Object.values(form).some((value) => value === ''))
 			return 'Todos los campos son obligatorios';
 		if (!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(form.email))
@@ -45,29 +44,28 @@ const Register = () => {
 			return 'Las contraseñas deben coincidir';
 	};
 
-	const handleLogin = async () => {
+	const handleRegister = async () => {
 		const error = validateErrors();
 		if (error) {
-			setError(error);
+			setMessage({type: 'error', value: error});
 			return;
 		}
 
 		setLoading(true);
 		const {passwordRepeat, ...payload} = form;
-		const {status, message, user} = await AuthServices.signin(payload);
-		if (status === 'error') setError(message);
-		else if (status === 'success') {
-			setError('');
-			dispatch({type: 'login', value: user});
-			router.replace('/home');
-		}
+		const registerError = await register(payload);
+		setMessage(
+			registerError
+				? {type: 'error', value: registerError}
+				: {type: 'success', value: 'Usuario creado exitosamente'}
+		);
 		setLoading(false);
 	};
 
 	return (
 		<main className={styles.main}>
 			<h2 className={styles.title}>Registrarse</h2>
-			{error && <p className={styles.error}>{error}</p>}
+			{message.value && <p className={styles[message.type]}>{message.value}</p>}
 			{fields.map(({id, label, type}) => (
 				<Input
 					key={id}
@@ -82,7 +80,7 @@ const Register = () => {
 			<Button
 				disabled={loading}
 				label="Registrar"
-				handleClick={handleLogin}
+				handleClick={handleRegister}
 				size="large"
 			/>
 		</main>

@@ -1,42 +1,59 @@
-import {useState} from 'react';
-import {withAuth} from '../utils/auth';
-import Carousel, {CarouselItem, NoCarousel} from '../components/Carousel/Carousel';
+import {useState, useEffect} from 'react';
+import {usePets, useUser, withAuth} from '../utils/auth';
+import Carousel, {
+	CarouselItem,
+	NoCarousel,
+} from '../components/Carousel/Carousel';
 import MessageBar from '../components/MessageBar/MessageBar';
 import {MatchTabNavigator} from '../components/TabNavigator';
 import styles from '../styles/Home.module.css';
-import {mockedPets as matchedPets, myMockedPets as myPets} from '../services/constants';
+import MatchServices from '../services/MatchesServices';
 import PetSelector from '../components/PetSelector/PetSelector';
 import MatchButton from '../components/MatchButton';
 
 function Home() {
+	const user = useUser();
 	const [activePet, setActivePet] = useState(0);
 	const [activeIndex, setActiveIndex] = useState(0);
+	const [matchedPets, setMatchedPets] = useState([]);
+	const myPets = usePets();
 
-	const likeHandler = () => {
-		console.log('Le diste like a', matchedPets[activeIndex].name);
+	const likeHandler = async () => {
+		const success = await MatchServices.create({
+			matcher: myPets[activePet].token,
+			matched: matchedPets[activeIndex].token,
+		});
+		if (success) console.log('Le diste like a', matchedPets[activeIndex].name);
+		else alert('¡Oops! Hubo un error, no se pudo crear el match.');
 	};
 
-	const username = 'Eren';
+	const getMatches = async () => {
+		const currentPet = myPets[activePet];
+		if (currentPet) {
+			const matches = await MatchServices.getPossibleMatches(currentPet.token);
+			setMatchedPets(matches);
+		}
+	};
+
+	useEffect(() => {
+		getMatches();
+	}, [activePet]);
+
 	return (
 		<main className={styles.container}>
-			<MessageBar message={`¡Bienvenido, ${username}!`} />
-			{
-				!!matchedPets.length && 
+			<MessageBar message={`¡Bienvenid@, ${user.name}!`} />
+			{!!matchedPets.length && (
 				<Carousel activeIndex={activeIndex} setActiveIndex={setActiveIndex}>
 					{matchedPets.map((pet, index) => (
 						<CarouselItem key={index} {...pet} />
 					))}
 				</Carousel>
-			}
+			)}
 			{!!matchedPets.length && <MatchButton handler={likeHandler} />}
-			{
-				!matchedPets.length && !!myPets.length &&
-				<NoCarousel messageId='no_matches'/>
-			}
-			{
-				!myPets.length &&
-				<NoCarousel messageId='no_pets' />
-			}
+			{!matchedPets.length && !!myPets.length && (
+				<NoCarousel messageId="no_matches" />
+			)}
+			{!myPets.length && <NoCarousel messageId="no_pets" />}
 			<PetSelector
 				pets={myPets}
 				activePet={activePet}

@@ -1,45 +1,17 @@
-import {useReducer} from 'react';
+import {useEffect, useReducer} from 'react';
+import {useRouter} from 'next/router';
 import {LoginContext} from './context';
+import PetsServices from '../../services/PetsServices';
+import AuthServices from '../../services/AuthServices';
 
-const mockUser = {
-	name: 'Ro',
-	lastname: 'Mena',
-	email: 'r@lila.com',
-	photo: '/assets/cat-pic.jpg',
-	pets: [
-		{
-			id: 1,
-			name: 'Jaskier',
-			gender: 'male',
-			type: 'cat',
-			photo: '/assets/cat-pic.jpg',
-		},
-		{
-			id: 2,
-			name: 'Jaskier',
-			gender: 'male',
-			type: 'cat',
-			photo: '/assets/cat-pic.jpg',
-		},
-		{
-			id: 3,
-			name: 'Jaskier',
-			gender: 'male',
-			type: 'cat',
-			photo: '/assets/cat-pic.jpg',
-		},
-	],
-};
-
-const initialState = {isLoggedIn: true, user: mockUser}; ///
-// const initialState = {isLoggedIn: false, user: null };
+const initialState = {isLoggedIn: false, user: null, pets: []};
 
 const reducer = (state, action) => {
 	switch (action.type) {
 		case 'login':
 			return {...state, isLoggedIn: true, user: action.value};
-		case 'logout':
-			return {isLoggedIn: false, user: null, establishment: null};
+		case 'update-pets':
+			return {...state, pets: action.value};
 		default:
 			return state;
 	}
@@ -47,9 +19,36 @@ const reducer = (state, action) => {
 
 const LoginProvider = ({children}) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
+	const router = useRouter();
+
+	const login = async (data) => {
+		const {status, message, user} = await AuthServices.login(data);
+		if (status === 'error') return message;
+		dispatch({type: 'login', value: user});
+		router.replace('/');
+	};
+
+	const register = async (data) => {
+		const {status, message} = await AuthServices.register(data);
+		if (status === 'success') {
+			const {email, password} = data;
+			await login({email, password});
+		} else return message;
+	};
+
+	const updatePets = async () => {
+		const pets = await PetsServices.getAll();
+		dispatch({type: 'update-pets', value: pets});
+	};
+
+	useEffect(() => {
+		if (state.isLoggedIn) {
+			updatePets();
+		}
+	}, [state.isLoggedIn]);
 
 	return (
-		<LoginContext.Provider value={{...state, dispatch}}>
+		<LoginContext.Provider value={{...state, login, updatePets, register}}>
 			{children}
 		</LoginContext.Provider>
 	);

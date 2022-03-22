@@ -18,7 +18,7 @@ const Landing = () => {
 						src="/assets/icon-heart-paw.svg"
 						alt="Icono"
 					/>
-					<Link href="/login">
+					<Link href="/register">
 						<a className="box">REGISTRARSE</a>
 					</Link>
 				</div>

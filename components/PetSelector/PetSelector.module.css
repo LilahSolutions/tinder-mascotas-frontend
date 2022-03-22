@@ -1,18 +1,18 @@
-.petSelectorContainer{
+.petSelectorContainer {
 	height: max-content;
 	width: 100%;
-	overflow: scroll;
+	overflow: auto;
 	display: flex;
 	padding: 1rem 0 0rem 1rem;
 	position: absolute;
 	bottom: 0;
 }
 
-.petSelectorContainer::-webkit-scrollbar{
+.petSelectorContainer::-webkit-scrollbar {
 	display: none;
 }
 
-.petBubble{
+.petBubble {
 	width: 3rem;
 	margin-right: 1.5rem;
 	display: flex;
@@ -20,40 +20,40 @@
 	align-items: center;
 }
 
-.petImg{
+.petImg {
 	width: 3rem;
 	height: 3rem;
 	object-fit: cover;
 	border-radius: 50%;
 	border: 2px gainsboro solid;
-	padding: .2rem
+	padding: 0.2rem;
 }
 
-.petName{
-	font-size: .9rem;
+.petName {
+	font-size: 0.9rem;
 	margin: 0;
 	padding: 0.3rem 0;
 }
 
-.active{
+.active {
 	border: 2px var(--main-color) solid;
-	padding: .3rem;
+	padding: 0.3rem;
 	background-color: gainsboro;
 }
 
-@media screen and (min-height: 700px){
-	.petImg{
+@media screen and (min-height: 700px) {
+	.petImg {
 		width: 4rem;
 		height: 4rem;
 	}
 
-	.petBubble{
-		width: 4rem
+	.petBubble {
+		width: 4rem;
 	}
 }
 
-@media screen and (min-width: 720px){
-	.petSelectorContainer{
+@media screen and (min-width: 720px) {
+	.petSelectorContainer {
 		width: max-content;
 		position: relative;
 		padding: 0;
@@ -63,7 +63,7 @@
 		justify-content: center;
 	}
 
-	.petBubble{
+	.petBubble {
 		margin: 0 1rem;
 		cursor: pointer;
 	}

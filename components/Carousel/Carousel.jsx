@@ -5,7 +5,7 @@ import {useSwipeable} from 'react-swipeable';
 import classNames from '../../utils/classNames';
 import {MESSAGE_IDS} from '../../services/config';
 
-export const CarouselItem = ({width, transform, name, img, description}) => {
+export const CarouselItem = ({width, transform, name, image, description}) => {
 	return (
 		<div
 			className={classNames(styles.carouselItem, styles.card)}
@@ -51,7 +51,7 @@ export const NoCarousel = ({messageId}) => {
 };
 
 const Carousel = ({children, activeIndex, setActiveIndex}) => {
-	const {innerWidth: width} = window;
+	const {innerWidth: width} = typeof window !== 'undefined' ? window : {};
 
 	const updateIndex = (newIndex) => {
 		if (newIndex < 0) {

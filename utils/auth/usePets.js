@@ -1,8 +1,8 @@
 import {useLoginContext} from './context';
 
 const usePets = () => {
-	const {user} = useLoginContext();
-	return user.pets;
+	const {pets} = useLoginContext();
+	return pets;
 };
 
 export default usePets;

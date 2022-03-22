@@ -1,26 +1,27 @@
 import {useRouter} from 'next/router';
 import {useEffect, useState, useRef} from 'react';
-import {withAuth} from '../../utils/auth';
+import {useLoginContext, withAuth} from '../../utils/auth';
 import MessageBar from '../../components/MessageBar/MessageBar';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import PetsServices from '../../services/PetsServices';
 import {TYPE_OPTIONS, SEX_OPTIONS} from '../../services/config';
 import styles from '../../styles/pet-actions.module.css';
 import Dropdown from '../../components/Dropdown';
 
-const MyPetAction = () => {
-	const [action, setAction] = useState('');
+const MyPetAction = ({action, token}) => {
 	const [pet, setPet] = useState({
 		name: '',
-		img: '',
+		image: '',
 		type: '',
 		sex: '',
 		description: '',
 	});
-	const [currentImage, setCurrentImage] = useState(pet.img);
+	const [currentImage, setCurrentImage] = useState(pet.image);
 	const [errors, setErrors] = useState([]);
 	const inputRef = useRef(null);
 	const imgRef = useRef(null);
+	const {pets: myPets, updatePets} = useLoginContext();
 	const router = useRouter();
 
 	const actions = {
@@ -34,29 +35,17 @@ const MyPetAction = () => {
 	};
 
 	useEffect(() => {
+		if (!['add', 'edit'].includes(action)) router.push('/');
 		if (action === 'edit') {
-			//Backend stuff
-			const mockedPet = {
-				name: 'Pancho',
-				type: 'Tortuga',
-				img: 'https://www.collinsdictionary.com/images/full/dog_230497594.jpg',
-				sex: 'Hembra',
-			};
-
-			setPet(mockedPet);
-			setCurrentImage(mockedPet.img);
+			const pet = myPets.find((pet) => pet.token === token);
+			if (!pet) {
+				router.push('/');
+				return;
+			}
+			setPet(pet);
+			setCurrentImage(pet.image);
 		}
-	}, [action]);
-
-	useEffect(() => {
-		if (
-			router.isReady &&
-			!router.asPath.endsWith('add') &&
-			!router.asPath.endsWith('edit')
-		)
-			router.push('/');
-		else setAction(router.query.action);
-	}, [router]);
+	}, []);
 
 	const selectImg = () => {
 		inputRef.current.click();
@@ -95,10 +84,7 @@ const MyPetAction = () => {
 	const dropdownHandler = ({target: {value, name}}) =>
 		setPet({...pet, [name]: value});
 
-	const hasErrors = (field) => {
-		console.log(errors.includes(field));
-		return errors.includes(field);
-	};
+	const hasErrors = (field) => errors.includes(field);
 
 	const validateErrors = () => {
 		const auxErrors = [];
@@ -110,12 +96,20 @@ const MyPetAction = () => {
 		return auxErrors;
 	};
 
-	const savePet = () => {
+	const savePet = async () => {
 		const currentErrors = validateErrors();
 
 		if (currentErrors.length === 0) {
-			//Backend stuff
-			console.log(pet);
+			let success;
+			if (action === 'edit') {
+				success = await PetsServices.update(token, pet);
+			} else {
+				success = await PetsServices.create(pet);
+			}
+			if (success) {
+				await updatePets();
+				router.push('/pets');
+			} else alert('¡Oops! Hubo un error.');
 		} else {
 			setErrors(currentErrors);
 		}
@@ -183,6 +177,11 @@ const MyPetAction = () => {
 		</div>
 	);
 };
+
+export async function getServerSideProps({query}) {
+	const {action, id} = query;
+	return {props: {action, token: id || ''}};
+}
 
 const Component = withAuth(MyPetAction);
 Component.goBack = '/pets';

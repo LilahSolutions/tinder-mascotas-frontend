@@ -28,11 +28,17 @@
 	font-weight: 400;
 }
 
-.error {
-	color: red;
+.error,
+.success {
 	margin: 0rem auto;
 	font-size: 1rem;
 	text-align: center;
+}
+.error {
+	color: red;
+}
+.success {
+	color: #00dd00;
 }
 
 .main button {
