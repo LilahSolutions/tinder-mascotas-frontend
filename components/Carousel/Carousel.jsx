@@ -12,7 +12,14 @@ export const CarouselItem = ({width, transform, name, image, description}) => {
 			style={{width, transform, transition: 'transform .3s'}}
 		>
 			<h2 className={styles.itemName}>{name}</h2>
-			<img className={styles.itemImg} src={image} alt={name} />
+			<img
+				className={styles.itemImg}
+				src={
+					image ||
+					'https://web.lilasolutions.com.ar/landing/images/lila-logo-white.svg'
+				}
+				alt={name}
+			/>
 			<div className={styles.itemDescriptionCtn}>
 				{description && (
 					<div className={styles.itemDescription}>

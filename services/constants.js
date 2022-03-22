@@ -14,7 +14,7 @@ export const TABS = [
 export const mockedPets = [
 	{
 		name: 'Fede',
-		img: 'https://web.lilasolutions.com.ar/landing/images/lila-logo-white.svg',
+		img: '',
 		race: 'Pichichu',
 		description:
 			'Siempre esta en constante movimiento y muerde solo si se enoja',

@@ -1,14 +1,14 @@
-.carousel{
+.carousel {
 	touch-action: pan-y;
 	position: relative;
 }
 
-.carouselInner{
+.carouselInner {
 	white-space: nowrap; /* keeps items in one line */
 	transition: transform 0.3s;
 }
 
-.carouselItem{
+.carouselItem {
 	display: inline-flex; /* also keeps items in one line */
 	flex-flow: column nowrap;
 	align-items: center;
@@ -16,15 +16,16 @@
 	margin: 0 10% 0 0%;
 	width: 60%;
 	height: 16rem;
+	min-width: 70%;
 }
 
-.card{
+.card {
 	background-color: var(--main-color);
 	color: #fff;
 	border-radius: 10px;
 }
 
-.noCarousel{
+.noCarousel {
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
@@ -35,79 +36,79 @@
 	width: 70%;
 }
 
-
-.carouselItem:first-child{
+.carouselItem:first-child {
 	margin: 0 10% 0 20%;
 }
 
-.itemName{
+.itemName {
 	text-align: center;
 	margin: 0;
 }
 
-.itemImg{
+.itemImg {
 	width: 40%;
 	max-width: 150px;
 }
 
-.itemDescriptionCtn{
+.itemDescriptionCtn {
 	display: flex;
 	flex-flow: column nowrap;
 	width: 80%;
 	height: 35%;
 	white-space: normal;
-	font-size: .9rem;
+	font-size: 0.9rem;
 }
 
-.descriptionTitle{
+.descriptionTitle {
 	font-weight: bolder;
 }
 
-.link{
+.link {
 	text-decoration: underline;
 	margin-top: 1.5rem;
 }
 
-.itemDescription{
+.itemDescription {
 	margin-top: 5%;
 }
 
-.carouselArrowsContainer{
-	display:none;
+.carouselArrowsContainer {
+	display: none;
 }
 
-@media screen and (min-height: 700px){
-	.carouselItem{
+@media screen and (min-height: 700px) {
+	.carouselItem {
 		height: 20rem;
 	}
 
-	.itemImg{
+	.itemImg {
 		width: 50%;
 	}
 }
 
 @media screen and (min-width: 720px) {
-	.carouselItem{
+	.carouselItem {
 		height: max-content;
 		width: 20%;
 		padding: 2.5rem 0;
+		min-width: 20%;
 	}
 
-	.carouselItem:first-child{
+	.carouselItem:first-child {
 		margin: 0 10% 0 40%;
 	}
 
-	.carouselArrowsContainer{
+	.carouselArrowsContainer {
 		display: flex;
-    width: 30%;
-    left: 35%;
+		width: 30%;
+		left: 35%;
 		top: 30%;
-    justify-content: space-between;
-    padding: 1rem 0;
+		justify-content: space-between;
+		padding: 1rem 0;
 		position: absolute;
 	}
 
-	.carouselArrow{
+	.carouselArrow {
 		width: 3rem;
 		cursor: pointer;
 		border-radius: 10%;
