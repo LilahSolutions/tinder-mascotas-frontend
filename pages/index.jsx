@@ -28,10 +28,11 @@ function Home() {
 	};
 
 	const getMatches = async () => {
-		const matches = await MatchServices.getPossibleMatches(
-			myPets[activePet].token
-		);
-		setMatchedPets(matches);
+		const currentPet = myPets[activePet];
+		if (currentPet) {
+			const matches = await MatchServices.getPossibleMatches(currentPet.token);
+			setMatchedPets(matches);
+		}
 	};
 
 	useEffect(() => {

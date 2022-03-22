@@ -1,6 +1,6 @@
 const fetchPets = async (endpoint, method, payload = {}) => {
 	try {
-		const res = await fetch(`/api/pets/${endpoint}`, {
+		const res = await fetch(`/api/pets${endpoint}`, {
 			headers: {'Content-Type': 'application/json'},
 			method: method,
 			mode: 'cors',
@@ -8,7 +8,7 @@ const fetchPets = async (endpoint, method, payload = {}) => {
 		});
 		if (res.status !== 200) throw new Error();
 		const {data} = await res.json();
-		if (data) return data; // Pet or pets array.
+		if (data !== undefined) return data || []; // Pet or pets array.
 		return true; // CRUD successful.
 	} catch {
 		return method === 'get' ? [] : false; // Something went wrong.
@@ -24,8 +24,5 @@ const PetsServices = {
 	update: (petToken, payload) => fetchPets(`/${petToken}`, 'put', payload),
 	delete: (petToken) => fetchPets(`/${petToken}`, 'delete'),
 };
-
-/// delete, update, create: true/false indicating success. If not error, component should call updatePets from context.
-/// gets: petObject / [].
 
 export default PetsServices;

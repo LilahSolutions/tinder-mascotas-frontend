@@ -26,6 +26,10 @@ a {
 	box-sizing: border-box;
 }
 
+img::before {
+	opacity: 0;
+}
+
 main {
 	height: calc(100vh - 3rem);
 	max-height: calc(100vh - 3rem);

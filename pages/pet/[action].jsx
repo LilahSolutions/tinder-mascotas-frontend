@@ -1,6 +1,6 @@
 import {useRouter} from 'next/router';
 import {useEffect, useState, useRef} from 'react';
-import {usePets, withAuth} from '../../utils/auth';
+import {useLoginContext, withAuth} from '../../utils/auth';
 import MessageBar from '../../components/MessageBar/MessageBar';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -21,7 +21,7 @@ const MyPetAction = ({action, token}) => {
 	const [errors, setErrors] = useState([]);
 	const inputRef = useRef(null);
 	const imgRef = useRef(null);
-	const myPets = usePets();
+	const {pets: myPets, updatePets} = useLoginContext();
 	const router = useRouter();
 
 	const actions = {
@@ -101,13 +101,15 @@ const MyPetAction = ({action, token}) => {
 
 		if (currentErrors.length === 0) {
 			let success;
-			if (actions === 'edit') {
+			if (action === 'edit') {
 				success = await PetsServices.update(token, pet);
 			} else {
 				success = await PetsServices.create(pet);
 			}
-			if (success) await updatePets();
-			else alert('¡Oops! Hubo un error.');
+			if (success) {
+				await updatePets();
+				router.push('/pets');
+			} else alert('¡Oops! Hubo un error.');
 		} else {
 			setErrors(currentErrors);
 		}
