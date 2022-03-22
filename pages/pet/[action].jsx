@@ -107,17 +107,6 @@ const MyPetAction = ({action, token}) => {
 
 		if (currentErrors.length === 0) {
 			let success;
-<<<<<<< Updated upstream
-			if (action === 'edit') {
-				success = await PetsServices.update(token, pet);
-			} else {
-				success = await PetsServices.create(pet);
-			}
-			if (success) {
-				await updatePets();
-				router.push('/pets');
-			} else alert('¡Oops! Hubo un error.');
-=======
 			const imageRef = ref(
 				storage,
 				`${user.token}-${pet.name.replaceAll(' ', '+')}.jpg`
@@ -143,7 +132,6 @@ const MyPetAction = ({action, token}) => {
 					} else alert('¡Oops! Hubo un error.');
 				});
 			});
->>>>>>> Stashed changes
 		} else {
 			setErrors(currentErrors);
 		}
