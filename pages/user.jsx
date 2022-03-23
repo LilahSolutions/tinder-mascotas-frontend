@@ -1,11 +1,10 @@
-import Link from 'next/link';
 import {withAuth, useLoginContext} from '../utils/auth';
 import {ProfileTabNavigator} from '../components/TabNavigator';
 import Button from '../components/Button';
 import styles from '../styles/User.module.css';
 
 function Profile() {
-	const {user, pets} = useLoginContext();
+	const {user, pets, logout} = useLoginContext();
 
 	return (
 		<main className={styles.container}>
@@ -24,9 +23,7 @@ function Profile() {
 					Cantidad de mascotas: <span>{pets.length}</span>
 				</h4>
 			</div>
-			<Link href={`/home`} passHref>
-				<Button label="Cerrar sesión" size="large" />
-			</Link>
+			<Button handleClick={logout} label="Cerrar sesión" size="large" />
 		</main>
 	);
 }
