@@ -24,7 +24,7 @@ function Home() {
 			matched: matchedPets[activeIndex].token,
 		});
 		if (success) {
-			const auxMatchedPets = matchedPets;
+			const auxMatchedPets = JSON.parse(JSON.stringify(matchedPets));
 			auxMatchedPets.splice(activeIndex, 1);
 			setMatchedPets(auxMatchedPets);
 		} else alert('¡Oops! Hubo un error, no se pudo crear el match.');
