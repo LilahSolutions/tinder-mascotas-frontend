@@ -23,8 +23,11 @@ function Home() {
 			matcher: myPets[activePet].token,
 			matched: matchedPets[activeIndex].token,
 		});
-		if (success) console.log('Le diste like a', matchedPets[activeIndex].name);
-		else alert('¡Oops! Hubo un error, no se pudo crear el match.');
+		if (success) {
+			const auxMatchedPets = JSON.parse(JSON.stringify(matchedPets));
+			auxMatchedPets.splice(activeIndex, 1);
+			setMatchedPets(auxMatchedPets);
+		} else alert('¡Oops! Hubo un error, no se pudo crear el match.');
 	};
 
 	const getMatches = async () => {

@@ -1,6 +1,7 @@
 .carousel {
 	touch-action: pan-y;
 	position: relative;
+	width: 100%;
 }
 
 .carouselInner {
@@ -16,7 +17,7 @@
 	margin: 0 10% 0 0%;
 	width: 60%;
 	height: 16rem;
-	min-width: 70%;
+	min-width: 60%;
 }
 
 .card {
@@ -96,6 +97,11 @@
 
 	.carouselItem:first-child {
 		margin: 0 10% 0 40%;
+	}
+
+	.noCarousel {
+		width: 30%;
+		padding: 1rem;
 	}
 
 	.carouselArrowsContainer {
