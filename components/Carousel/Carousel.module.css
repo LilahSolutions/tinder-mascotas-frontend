@@ -48,13 +48,14 @@
 
 .itemImg {
 	width: 10rem;
-	aspect-ratio: 1/1;
+	height: 10rem;
 	object-fit: cover;
 	border-radius: 50%;
 }
 
 .noDescription {
 	width: 180px;
+	height: 180px;
 }
 
 .itemDescriptionCtn {
@@ -89,7 +90,9 @@
 	}
 
 	.itemImg {
+		aspect-ratio: 1/1;
 		width: 50%;
+		height: auto;
 	}
 
 	.noDescription {
