@@ -48,7 +48,15 @@
 
 .itemImg {
 	width: 40%;
+	aspect-ratio: 1/1;
 	max-width: 150px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.noDescription {
+	width: 70%;
+	max-width: 250px;
 }
 
 .itemDescriptionCtn {
@@ -85,6 +93,11 @@
 	.itemImg {
 		width: 50%;
 	}
+
+	.noDescription {
+		width: 70%;
+		max-width: 250px;
+	}
 }
 
 @media screen and (min-width: 720px) {
@@ -93,6 +106,7 @@
 		width: 20%;
 		padding: 2.5rem 0;
 		min-width: 20%;
+		min-height: 375px;
 	}
 
 	.carouselItem:first-child {
