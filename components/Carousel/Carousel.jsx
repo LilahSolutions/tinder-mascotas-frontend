@@ -13,23 +13,26 @@ export const CarouselItem = ({width, transform, name, image, description}) => {
 		>
 			<h2 className={styles.itemName}>{name}</h2>
 			<img
-				className={styles.itemImg}
+				className={classNames(
+					styles.itemImg,
+					!description && styles.noDescription
+				)}
 				src={
 					image ||
 					'https://web.lilasolutions.com.ar/landing/images/lila-logo-white.svg'
 				}
 				alt={name}
 			/>
-			<div className={styles.itemDescriptionCtn}>
-				{description && (
+			{description && (
+				<div className={styles.itemDescriptionCtn}>
 					<div className={styles.itemDescription}>
 						<span className={styles.descriptionTitle}>
 							{`Dato curioso sobre ${name}: `}
 						</span>
 						<span>{description}</span>
 					</div>
-				)}
-			</div>
+				</div>
+			)}
 		</div>
 	);
 };
