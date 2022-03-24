@@ -40,7 +40,7 @@ const MyPetAction = ({action, token}) => {
 
 	useEffect(() => {
 		if (!['add', 'edit'].includes(action)) router.push('/');
-		if (action === 'edit') {
+		else if (action === 'edit') {
 			const pet = myPets.find((pet) => pet.token === token);
 			if (!pet) {
 				router.push('/');
@@ -101,7 +101,6 @@ const MyPetAction = ({action, token}) => {
 	};
 
 	const updatePet = async (newPet) => {
-		console.log(newPet);
 		let success;
 		if (action === 'edit') {
 			success = await PetsServices.update(user.token, newPet);
@@ -122,15 +121,16 @@ const MyPetAction = ({action, token}) => {
 				storage,
 				`${user.token}-${pet.name.replaceAll(' ', '+')}`
 			);
-
-			if (currentImage === pet.image) {
+			if (!currentImage || currentImage === pet.image) {
 				updatePet(pet);
 			} else {
-				uploadString(imageRef, currentImage, 'data_url').then((snapshot) => {
-					getDownloadURL(imageRef).then(async (url) => {
-						updatePet({...pet, image: url});
-					});
-				});
+				try {
+					await uploadString(imageRef, currentImage, 'data_url');
+					const url = await getDownloadURL(imageRef);
+					updatePet({...pet, image: url});
+				} catch {
+					console.log('¡Oops! Hubo un error intentando guardar la foto');
+				}
 			}
 		} else {
 			setErrors(currentErrors);
