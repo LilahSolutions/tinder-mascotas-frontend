@@ -7,8 +7,7 @@ import Input from '../../components/Input';
 import PetsServices from '../../services/PetsServices';
 import {TYPE_OPTIONS, SEX_OPTIONS} from '../../services/config';
 import firebase from '../../services/firebase/firebase';
-// import {getFirestore, collection, getDocs} from 'firebase/firestore/lite';
-import {getStorage, ref, uploadBytes, getDownloadURL} from 'firebase/storage';
+import {getStorage, ref, getDownloadURL, uploadString} from 'firebase/storage';
 import styles from '../../styles/pet-actions.module.css';
 import Dropdown from '../../components/Dropdown';
 
@@ -37,7 +36,6 @@ const MyPetAction = ({action, token}) => {
 		edit: 'Actualizar',
 	};
 
-	// const database = getFirestore(firebase);
 	const storage = getStorage(firebase);
 
 	useEffect(() => {
@@ -109,11 +107,10 @@ const MyPetAction = ({action, token}) => {
 			let success;
 			const imageRef = ref(
 				storage,
-				`${user.token}-${pet.name.replaceAll(' ', '+')}.jpg`
+				`${user.token}-${pet.name.replaceAll(' ', '+')}`
 			);
 
-			uploadBytes(imageRef, currentImage).then((snapshot) => {
-				console.log('Uploaded to storage');
+			uploadString(imageRef, currentImage, 'data_url').then((snapshot) => {
 				getDownloadURL(imageRef).then(async (url) => {
 					if (action === 'edit') {
 						success = await PetsServices.update(user.token, {
