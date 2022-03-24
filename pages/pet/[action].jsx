@@ -100,35 +100,38 @@ const MyPetAction = ({action, token}) => {
 		return auxErrors;
 	};
 
+	const updatePet = async (newPet) => {
+		console.log(newPet);
+		let success;
+		if (action === 'edit') {
+			success = await PetsServices.update(user.token, newPet);
+		} else {
+			success = await PetsServices.create(newPet);
+		}
+		if (success) {
+			await updatePets();
+			router.push('/pets');
+		} else alert('¡Oops! Hubo un error.');
+	};
+
 	const savePet = async () => {
 		const currentErrors = validateErrors();
 
 		if (currentErrors.length === 0) {
-			let success;
 			const imageRef = ref(
 				storage,
 				`${user.token}-${pet.name.replaceAll(' ', '+')}`
 			);
 
-			uploadString(imageRef, currentImage, 'data_url').then((snapshot) => {
-				getDownloadURL(imageRef).then(async (url) => {
-					if (action === 'edit') {
-						success = await PetsServices.update(user.token, {
-							...pet,
-							image: url,
-						});
-					} else {
-						success = await PetsServices.create({
-							...pet,
-							image: url,
-						});
-					}
-					if (success) {
-						await updatePets();
-						router.push('/pets');
-					} else alert('¡Oops! Hubo un error.');
+			if (currentImage === pet.image) {
+				updatePet(pet);
+			} else {
+				uploadString(imageRef, currentImage, 'data_url').then((snapshot) => {
+					getDownloadURL(imageRef).then(async (url) => {
+						updatePet({...pet, image: url});
+					});
 				});
-			});
+			}
 		} else {
 			setErrors(currentErrors);
 		}
