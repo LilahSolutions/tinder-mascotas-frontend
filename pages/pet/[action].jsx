@@ -103,7 +103,7 @@ const MyPetAction = ({action, token}) => {
 	const updatePet = async (newPet) => {
 		let success;
 		if (action === 'edit') {
-			success = await PetsServices.update(user.token, newPet);
+			success = await PetsServices.update(token, newPet);
 		} else {
 			success = await PetsServices.create(newPet);
 		}
