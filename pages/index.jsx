@@ -25,6 +25,9 @@ function Home() {
 		});
 		if (success) {
 			const auxMatchedPets = JSON.parse(JSON.stringify(matchedPets));
+			if (activeIndex === auxMatchedPets.length - 1) {
+				setActiveIndex(activeIndex - 1);
+			}
 			auxMatchedPets.splice(activeIndex, 1);
 			setMatchedPets(auxMatchedPets);
 		} else alert('¡Oops! Hubo un error, no se pudo crear el match.');
@@ -40,6 +43,7 @@ function Home() {
 
 	useEffect(() => {
 		getMatches();
+		setActiveIndex(0);
 	}, [activePet]);
 
 	return (
