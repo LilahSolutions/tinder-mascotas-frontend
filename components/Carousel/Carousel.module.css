@@ -106,7 +106,7 @@
 		width: 20%;
 		padding: 2.5rem 0;
 		min-width: 20%;
-		min-height: 375px;
+		min-height: 300px;
 	}
 
 	.carouselItem:first-child {
