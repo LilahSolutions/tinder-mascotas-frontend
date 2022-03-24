@@ -53,7 +53,7 @@ const Pet = ({token}) => {
 								Tipo: <span>{pet.type}</span>
 							</h4>
 							<h4>
-								Mail del dueño: <span>{pet.email}</span>
+								Mail del dueño: <span>{pet.ownerEmail}</span>
 							</h4>
 						</div>
 					</li>
