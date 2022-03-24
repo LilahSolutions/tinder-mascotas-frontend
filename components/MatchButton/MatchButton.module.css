@@ -1,4 +1,4 @@
-.buttonContainer{
+.buttonContainer {
 	display: flex;
 	width: max-content;
 	margin: 1rem auto 0 auto;
@@ -6,36 +6,36 @@
 	align-items: center;
 }
 
-.buttonImage{
+.buttonImage {
 	width: 4rem;
 	height: auto;
-	filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, .7));
+	filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.7));
 	cursor: pointer;
 }
 
-.buttonContainer:active .buttonImage{
-	transform: scale(.9);
-	filter: drop-shadow( 1px 1px 1px rgba(0, 0, 0, .7));
+.buttonContainer:active .buttonImage {
+	transform: scale(0.9);
+	filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.7));
 }
 
-.buttonText{
-	margin-top: .7rem;
+.buttonText {
+	margin-top: 0.7rem;
 	font-weight: bold;
 	color: #303030;
 }
 
 @media screen and (min-height: 700px) {
-	.buttonContainer{
+	.buttonContainer {
 		margin: 3rem auto 0 auto;
 	}
 
-	.buttonImage{
+	.buttonImage {
 		width: 5rem;
 	}
 }
 
 @media screen and (min-width: 720px) {
-	.buttonContainer{
+	.buttonContainer {
 		margin: 1rem auto 0 auto;
 	}
 }

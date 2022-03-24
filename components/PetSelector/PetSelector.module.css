@@ -6,6 +6,7 @@
 	padding: 1rem 0 0rem 1rem;
 	position: absolute;
 	bottom: 0;
+	scrollbar-width: none;
 }
 
 .petSelectorContainer::-webkit-scrollbar {
@@ -15,9 +16,6 @@
 .petBubble {
 	width: 3rem;
 	margin-right: 1.5rem;
-	display: flex;
-	flex-flow: column nowrap;
-	align-items: center;
 }
 
 .petImg {
@@ -32,6 +30,7 @@
 .petName {
 	font-size: 0.9rem;
 	margin: 0;
+	text-align: center;
 	padding: 0.3rem 0;
 }
 
@@ -58,7 +57,7 @@
 		position: relative;
 		padding: 0;
 		max-width: 704px;
-		margin: 2rem auto 0 auto;
+		margin: 0 auto;
 		flex-flow: row nowrap;
 		justify-content: center;
 	}
