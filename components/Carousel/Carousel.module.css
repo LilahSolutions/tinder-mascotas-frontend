@@ -93,7 +93,7 @@
 	}
 
 	.noDescription {
-		width: 250px;
+		width: 200px;
 	}
 }
 
@@ -113,6 +113,11 @@
 	.noCarousel {
 		width: 30%;
 		padding: 1rem;
+	}
+
+	.noDescription {
+		width: 250px;
+		margin-top: 0.7rem;
 	}
 
 	.carouselArrowsContainer {
