@@ -9,7 +9,9 @@ const handler = async ({method, query: {endpoint}, body}, resToFront) => {
 				if (resFromBack.status !== 200)
 					return resToFront.status(resFromBack.status).json();
 				const {Data} = await resFromBack.json();
-				return resToFront.status(200).json({data: Data.whoMatchedMe || Data});
+				return resToFront
+					.status(200)
+					.json({data: Data?.whoMatchedMe || Data || []});
 			}
 			case 'POST': {
 				const {matcher, matched} = body;

@@ -16,8 +16,8 @@ const MyPetAction = ({action, token}) => {
 	const [pet, setPet] = useState({
 		name: '',
 		image: '',
-		type: '',
-		sex: '',
+		type: 'Perro',
+		sex: 'Macho',
 		description: '',
 	});
 	const [currentImage, setCurrentImage] = useState(pet.image);

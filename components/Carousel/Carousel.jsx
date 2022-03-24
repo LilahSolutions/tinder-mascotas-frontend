@@ -15,7 +15,7 @@ export const CarouselItem = ({width, transform, name, image, description}) => {
 			<img
 				className={styles.itemImg}
 				src={
-					img ||
+					image ||
 					'https://web.lilasolutions.com.ar/landing/images/lila-logo-white.svg'
 				}
 				alt={name}

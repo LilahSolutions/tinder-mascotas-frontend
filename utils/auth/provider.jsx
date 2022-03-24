@@ -1,4 +1,4 @@
-import {useEffect, useReducer} from 'react';
+import {useReducer} from 'react';
 import {useRouter} from 'next/router';
 import {LoginContext} from './context';
 import PetsServices from '../../services/PetsServices';
@@ -10,6 +10,8 @@ const reducer = (state, action) => {
 	switch (action.type) {
 		case 'login':
 			return {...state, isLoggedIn: true, user: action.value};
+		case 'logout':
+			return initialState;
 		case 'update-pets':
 			return {...state, pets: action.value};
 		default:
@@ -21,11 +23,23 @@ const LoginProvider = ({children}) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 	const router = useRouter();
 
+	const updatePets = async () => {
+		const pets = await PetsServices.getAll();
+		dispatch({type: 'update-pets', value: pets});
+	};
+
 	const login = async (data) => {
 		const {status, message, user} = await AuthServices.login(data);
 		if (status === 'error') return message;
 		dispatch({type: 'login', value: user});
+		await updatePets();
 		router.replace('/');
+	};
+
+	const logout = async () => {
+		dispatch({type: 'logout'});
+		sessionStorage.removeItem('sessionToken');
+		router.replace('/home');
 	};
 
 	const register = async (data) => {
@@ -36,19 +50,10 @@ const LoginProvider = ({children}) => {
 		} else return message;
 	};
 
-	const updatePets = async () => {
-		const pets = await PetsServices.getAll();
-		dispatch({type: 'update-pets', value: pets});
-	};
-
-	useEffect(() => {
-		if (state.isLoggedIn) {
-			updatePets();
-		}
-	}, [state.isLoggedIn]);
-
 	return (
-		<LoginContext.Provider value={{...state, login, updatePets, register}}>
+		<LoginContext.Provider
+			value={{...state, login, logout, updatePets, register}}
+		>
 			{children}
 		</LoginContext.Provider>
 	);
